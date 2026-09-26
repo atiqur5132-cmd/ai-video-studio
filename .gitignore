@@ -6,3 +6,5 @@ out
 .env
 .env.*
 !.env.example
+public/raw_*
+public/still_*

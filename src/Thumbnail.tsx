@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
-import { OfficialLogoBadge } from "./components/OfficialLogoBadge";
+import { ProceduralCellCanvas } from "./components/biotech/ProceduralCellCanvas";
 
 export const Thumbnail: React.FC = () => {
   return (
@@ -15,11 +15,12 @@ export const Thumbnail: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: "-15%",
-          right: "-10%",
+          top: "-10%",
+          left: "-5%",
           width: 1200,
           height: 1200,
-          background: "radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(14, 165, 233, 0.1) 40%, transparent 70%)",
+          background:
+            "radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(6, 182, 212, 0.1) 40%, transparent 70%)",
           zIndex: 1,
           pointerEvents: "none",
         }}
@@ -28,149 +29,149 @@ export const Thumbnail: React.FC = () => {
         style={{
           position: "absolute",
           bottom: "-20%",
-          left: "-10%",
+          right: "-10%",
           width: 1100,
           height: 1100,
-          background: "radial-gradient(circle, rgba(235, 140, 90, 0.2) 0%, transparent 60%)",
+          background:
+            "radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, transparent 60%)",
           zIndex: 1,
           pointerEvents: "none",
         }}
       />
 
+      {/* Layer 4: Bold Rounded Outer Neon Border Flush to Perimeter */}
+      <div
+        style={{
+          position: "absolute",
+          top: 18,
+          left: 18,
+          right: 18,
+          bottom: 18,
+          border: "6px solid #10B981",
+          borderRadius: 28,
+          boxShadow: "0 0 45px rgba(16, 185, 129, 0.45), inset 0 0 30px rgba(16, 185, 129, 0.25)",
+          zIndex: 40,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* 3D Procedural Cell Canvas in the Right Half */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: -100,
+          width: 1100,
+          height: 1100,
+          transform: "translateY(-50%)",
+          zIndex: 5,
+          opacity: 0.95,
+        }}
+      >
+        <ProceduralCellCanvas width={1100} height={1100} pulseSpeed={1.2} />
+      </div>
+
       {/* Main Content Layout */}
       <div
         style={{
           position: "relative",
-          zIndex: 10,
-          padding: "80px 100px",
+          zIndex: 20,
+          padding: "90px 100px",
           display: "flex",
+          flexDirection: "column",
           justifyContent: "space-between",
-          alignItems: "center",
           height: "100%",
           boxSizing: "border-box",
+          maxWidth: 1150,
         }}
       >
-        {/* Left Column: Headlines & High-Stakes Narrative */}
-        <div style={{ maxWidth: 950 }}>
-          {/* Top Pill Bar */}
-          <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 28 }}>
-            <span
-              style={{
-                background: "rgba(0, 240, 255, 0.15)",
-                border: "1.5px solid #00F0FF",
-                borderRadius: 999,
-                padding: "8px 22px",
-                color: "#00F0FF",
-                fontWeight: 900,
-                fontSize: 18,
-                letterSpacing: "0.1em",
-              }}
-            >
-              ANTHROPIC SEPTEMBER LEAK
-            </span>
-            <span
-              style={{
-                background: "rgba(239, 68, 68, 0.2)",
-                border: "1px solid #EF4444",
-                borderRadius: 999,
-                padding: "8px 20px",
-                color: "#F87171",
-                fontWeight: 900,
-                fontSize: 16,
-              }}
-            >
-              EPOCH AI: LEVEL 4
-            </span>
-          </div>
-
-          {/* Massive 2-Tier Hero Headline */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <span
-              style={{
-                fontSize: 48,
-                fontWeight: 900,
-                color: "#38BDF8",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              RECURSIVE SELF-IMPROVEMENT
-            </span>
-            <h1
-              style={{
-                margin: 0,
-                fontSize: 140,
-                fontWeight: 950,
-                letterSpacing: "-0.04em",
-                textTransform: "uppercase",
-                color: "#FFFFFF",
-                lineHeight: 0.9,
-                filter: "drop-shadow(0 0 45px rgba(0, 240, 255, 0.8))",
-              }}
-            >
-              AI BUILDS AI
-            </h1>
-          </div>
-
-          {/* Bottom High-Impact Evidence Bar */}
+        {/* Top Authority Header */}
+        <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
           <div
             style={{
-              marginTop: 48,
-              display: "flex",
-              alignItems: "center",
-              gap: 24,
-              background: "rgba(15, 23, 42, 0.95)",
-              border: "1.5px solid rgba(56, 189, 248, 0.4)",
-              borderRadius: 20,
-              padding: "18px 36px",
-              width: "fit-content",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.8)",
+              background: "#10B981",
+              color: "#000000",
+              fontWeight: 900,
+              fontSize: 16,
+              padding: "6px 18px",
+              borderRadius: 8,
+              letterSpacing: "1.5px",
             }}
           >
-            <div style={{ color: "#00F0FF", fontSize: 26, fontWeight: 900 }}>26% CLAUDE-LED</div>
-            <div style={{ width: 1, height: 30, background: "rgba(255,255,255,0.2)" }} />
-            <div style={{ color: "#34D399", fontSize: 26, fontWeight: 900 }}>100,000 AGENTS</div>
-            <div style={{ width: 1, height: 30, background: "rgba(255,255,255,0.2)" }} />
-            <div style={{ color: "#FBBF24", fontSize: 26, fontWeight: 900 }}>100GW STARGATE</div>
+            NATURE BIOTECHNOLOGY
+          </div>
+          <div
+            style={{
+              background: "rgba(5, 11, 24, 0.85)",
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              color: "#94A3B8",
+              fontWeight: 800,
+              fontSize: 15,
+              padding: "6px 18px",
+              borderRadius: 8,
+              letterSpacing: "1px",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#10B981" }} />
+            ARC INSTITUTE • TAHOE-100M
           </div>
         </div>
 
-        {/* Right Column: Visual Face-off Logos & Telemetry */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 36,
-            background: "rgba(8, 14, 26, 0.85)",
-            border: "1px solid rgba(0, 240, 255, 0.3)",
-            borderRadius: 28,
-            padding: "50px 60px",
-            boxShadow: "0 30px 80px rgba(0,0,0,0.9), 0 0 50px rgba(14, 165, 233, 0.15)",
-          }}
-        >
-          <div style={{ display: "flex", gap: 40, alignItems: "center" }}>
-            <OfficialLogoBadge logo="anthropic" label="ANTHROPIC" size={130} glowColor="rgba(235, 140, 90, 0.7)" staticMode={true} />
-            <div style={{ fontSize: 32, fontWeight: 900, color: "#64748B" }}>VS</div>
-            <OfficialLogoBadge logo="openai" label="OPENAI" size={130} glowColor="rgba(16, 185, 129, 0.7)" staticMode={true} />
-          </div>
-
-          <div
+        {/* Massive 2-Tier Kinetic Punch Headline */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 40 }}>
+          <span
             style={{
-              background: "rgba(0, 240, 255, 0.1)",
-              border: "1px solid #00F0FF",
-              borderRadius: 14,
-              padding: "12px 24px",
-              textAlign: "center",
+              fontSize: 48,
+              fontWeight: 900,
+              color: "#FF5252",
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+              textShadow: "0 0 25px rgba(255, 82, 82, 0.5)",
             }}
           >
-            <span style={{ fontSize: 13, color: "#94A3B8", textTransform: "uppercase", fontWeight: 700, display: "block" }}>
-              Singularity Index
-            </span>
-            <span style={{ fontSize: 32, fontWeight: 900, color: "#00F0FF", fontFamily: "monospace" }}>
-              LEVEL 4 LEADS
-            </span>
-          </div>
+            BIOLOGY'S CHATGPT MOMENT
+          </span>
+          <h1
+            style={{
+              margin: 0,
+              fontSize: 130,
+              fontWeight: 950,
+              letterSpacing: "-2px",
+              textTransform: "uppercase",
+              color: "#FFFFFF",
+              lineHeight: 0.95,
+              filter:
+                "drop-shadow(0 0 25px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 50px rgba(16, 185, 129, 0.75)) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95))",
+            }}
+          >
+            THE VIRTUAL<br />
+            <span style={{ color: "#10B981" }}>CELL</span>
+          </h1>
+        </div>
+
+        {/* Bottom High-Impact Evidence Bar */}
+        <div
+          style={{
+            marginTop: 40,
+            display: "flex",
+            alignItems: "center",
+            gap: 24,
+            background: "rgba(5, 11, 24, 0.92)",
+            border: "1.5px solid rgba(16, 185, 129, 0.45)",
+            borderRadius: 20,
+            padding: "18px 36px",
+            width: "fit-content",
+            boxShadow: "0 25px 60px rgba(0,0,0,0.85)",
+          }}
+        >
+          <div style={{ color: "#10B981", fontSize: 26, fontWeight: 900 }}>502M CELLS</div>
+          <div style={{ width: 1, height: 30, background: "rgba(255,255,255,0.2)" }} />
+          <div style={{ color: "#06B6D4", fontSize: 26, fontWeight: 900 }}>1,142 DRUGS</div>
+          <div style={{ width: 1, height: 30, background: "rgba(255,255,255,0.2)" }} />
+          <div style={{ color: "#FBBF24", fontSize: 26, fontWeight: 900 }}>ZERO-SHOT IN-SILICO</div>
         </div>
       </div>
     </AbsoluteFill>
