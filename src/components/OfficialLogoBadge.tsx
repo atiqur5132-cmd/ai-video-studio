@@ -1,7 +1,7 @@
 import React from 'react';
 import { Img, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
 
-export type LogoType = 'openai' | 'claude' | 'anthropic' | 'blender' | 'unreal' | 'xai';
+export type LogoType = 'openai' | 'claude' | 'anthropic' | 'blender' | 'unreal' | 'xai' | 'google' | 'meta';
 
 interface OfficialLogoBadgeProps {
   logo: LogoType;
@@ -10,23 +10,34 @@ interface OfficialLogoBadgeProps {
   sublabel?: string;
   glowColor?: string;
   delay?: number;
+  staticMode?: boolean;
 }
 
 const LOGO_MAP: Record<LogoType, { file: string; defaultGlow: string; name: string }> = {
   openai: {
     file: 'logos/openai_logo.png',
     defaultGlow: 'rgba(16, 185, 129, 0.6)',
-    name: 'OPENAI ASTRA / SOL',
+    name: 'OPENAI',
   },
   claude: {
     file: 'logos/claude_logo.png',
     defaultGlow: 'rgba(217, 119, 87, 0.7)',
-    name: 'CLAUDE OPUS 5.5',
+    name: 'CLAUDE',
   },
   anthropic: {
     file: 'logos/anthropic_logo.png',
     defaultGlow: 'rgba(235, 140, 90, 0.6)',
     name: 'ANTHROPIC',
+  },
+  google: {
+    file: 'logos/google_logo.png',
+    defaultGlow: 'rgba(66, 133, 244, 0.7)',
+    name: 'GOOGLE DEEPMIND',
+  },
+  meta: {
+    file: 'logos/meta_logo.png',
+    defaultGlow: 'rgba(24, 119, 242, 0.7)',
+    name: 'META AI',
   },
   blender: {
     file: 'logos/blender_logo.png',
@@ -41,7 +52,7 @@ const LOGO_MAP: Record<LogoType, { file: string; defaultGlow: string; name: stri
   xai: {
     file: 'logos/xai_logo.png',
     defaultGlow: 'rgba(255, 255, 255, 0.6)',
-    name: 'xAI GROK 4.7',
+    name: 'xAI GROK',
   },
 };
 
@@ -52,12 +63,13 @@ export const OfficialLogoBadge: React.FC<OfficialLogoBadgeProps> = ({
   sublabel,
   glowColor,
   delay = 0,
+  staticMode = false,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const adjustedFrame = Math.max(0, frame - delay);
-  const scale = spring({
+  const adjustedFrame = staticMode ? 30 : Math.max(0, frame - delay);
+  const scale = staticMode ? 1 : spring({
     frame: adjustedFrame,
     fps,
     config: { damping: 14, stiffness: 120 },

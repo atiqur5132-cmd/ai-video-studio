@@ -7,11 +7,14 @@
     "build": "remotion render MainVideo out/MainVideo.mp4",
     "render": "remotion render MainVideo out/MainVideo.mp4",
     "render:thumb": "remotion still Thumbnail out/thumbnail.png",
+    "voice:gemini": "node scripts/generate_gemini_voice.js",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
+    "@google/genai": "^2.24.0",
     "@remotion/cli": "^4.0.260",
     "@remotion/media-utils": "^4.0.260",
+    "dotenv": "^18.0.4",
     "lucide-react": "^1.16.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
