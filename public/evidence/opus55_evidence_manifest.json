@@ -1,0 +1,50 @@
+[
+  {
+    "tag": "waymo_3d",
+    "user": "HarshithLucky3",
+    "id": "2101652326683668796",
+    "author": "Harshith",
+    "handle": "HarshithLucky3",
+    "avatar": "https://pbs.twimg.com/profile_images/1940482570484858880/dYD7sVKE_200x200.jpg",
+    "text": "Anthropic cooked with Opus 5.5 🔥🔥\n\nits better than Fable 5.1 and Astra \nits little close to real one\nthose tiny details: jaguar logo, sensors\n\n> 3d model of Waymo autonomous vehicle (Jaguar I-PACE crossover SUV)\n\nOpus 5.5 max in Claude code",
+    "videoUrl": "https://video.twimg.com/amplify_video/2101651766777716736/vid/avc1/2880x1800/rujwe1Ae-0PJm0bi.mp4?tag=29",
+    "posterUrl": "https://pbs.twimg.com/amplify_video_thumb/2101651766777716736/img/j7FuQ3CEkWG83Cx4.jpg",
+    "videoFile": "evidence/waymo_3d.mp4",
+    "posterFile": "evidence/waymo_3d_thumb.jpg"
+  },
+  {
+    "tag": "villa_3d",
+    "user": "srikanthvaluri",
+    "id": "2101691334360965493",
+    "author": "Srikanth Valluri",
+    "handle": "srikanthvaluri",
+    "avatar": "https://pbs.twimg.com/profile_images/1876055631079313408/PCnRUOxe_200x200.jpg",
+    "text": "Opus 5.5 Max (3D Villa)\n\nThis is so impressive..\nAnthropic  will definitely cooked hard this time with Opus model",
+    "videoUrl": "https://video.twimg.com/amplify_video/2101690120181309440/vid/avc1/2880x1524/B-YpSVsjadkFzFZC.mp4?tag=29",
+    "posterUrl": "https://pbs.twimg.com/amplify_video_thumb/2101690120181309440/img/1Mm1oIi2s4XvhBqI.jpg",
+    "videoFile": "evidence/villa_3d.mp4",
+    "posterFile": "evidence/villa_3d_thumb.jpg"
+  },
+  {
+    "tag": "fake_debunk",
+    "user": "HarshithLucky3",
+    "id": "2101748269248614599",
+    "author": "Harshith",
+    "handle": "HarshithLucky3",
+    "avatar": "https://pbs.twimg.com/profile_images/1940482570484858880/dYD7sVKE_200x200.jpg",
+    "text": "This is Fake Opus 5.5 output\n\nHe stole the video from YouTube: \nhttps://youtu.be/AlMLFkN79dA?si=SXP4a-N9BqrKCFg3\n\nThanks for the info @Deepusleepy",
+    "videoUrl": null,
+    "posterUrl": null
+  },
+  {
+    "tag": "lyra_leak",
+    "user": "lyraxana",
+    "id": "2101668658711798083",
+    "author": "lyra",
+    "handle": "lyraxana",
+    "avatar": "https://pbs.twimg.com/profile_images/2093829072925192192/BBcihBo3_200x200.jpg",
+    "text": "Anthropic is currently stealth testing Opus 5.5 (`claude-opus-5-5`) under the codename `claude-wafer-eap` which is planned to be released on Tuesday.",
+    "videoUrl": null,
+    "posterUrl": null
+  }
+]

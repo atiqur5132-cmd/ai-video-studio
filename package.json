@@ -1,0 +1,25 @@
+{
+  "name": "ai-video-studio",
+  "version": "1.0.0",
+  "description": "Unified Master Studio for High-Retention Remotion Documentaries & Tech Explainers",
+  "scripts": {
+    "start": "remotion preview",
+    "build": "remotion render MainVideo out/MainVideo.mp4",
+    "render": "remotion render MainVideo out/MainVideo.mp4",
+    "render:thumb": "remotion still Thumbnail out/thumbnail.png",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.260",
+    "@remotion/media-utils": "^4.0.260",
+    "lucide-react": "^1.16.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.260"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  }
+}
