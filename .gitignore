@@ -8,3 +8,4 @@ out
 !.env.example
 public/raw_*
 public/still_*
+*.wav
