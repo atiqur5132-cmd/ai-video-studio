@@ -7,6 +7,7 @@
     "build": "remotion render MainVideo out/MainVideo.mp4",
     "render": "remotion render MainVideo out/MainVideo.mp4",
     "render:thumb": "remotion still Thumbnail out/thumbnail.png",
+    "voice": "python scripts/generate_studio_voice.py",
     "voice:gemini": "node scripts/generate_gemini_voice.js",
     "upgrade": "remotion upgrade"
   },

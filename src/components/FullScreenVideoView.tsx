@@ -23,9 +23,10 @@ export const FullScreenVideoView: React.FC<FullScreenVideoViewProps> = ({ videoS
         alignItems: "center",
       }}
     >
-      {/* SINGLE ROCK-SOLID VIDEO (Zero Duplicate Decoders, Zero Scaling, Zero Flicker) */}
+      {/* SINGLE ROCK-SOLID VIDEO (Zero Duplicate Decoders, Zero Freeze with Loop, Zero Flicker) */}
       <Video
         src={safeStatic(videoSrc)}
+        loop
         muted
         volume={0}
         onError={(e) => {
@@ -36,6 +37,9 @@ export const FullScreenVideoView: React.FC<FullScreenVideoViewProps> = ({ videoS
           height: "100%",
           objectFit: "contain",
           display: "block",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          transform: "translate3d(0, 0, 0)",
         }}
       />
     </AbsoluteFill>

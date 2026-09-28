@@ -1,15 +1,15 @@
 import React from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { Gemini4ProRealScenes } from "./scenes/Gemini4ProRealScenes";
+import { DevDay2026Scenes } from "./scenes/DevDay2026Scenes";
 
 export const MainVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#000000" }}>
-      {/* Studio Mastered Broadcast Voiceover (1:1 with Whisper Timestamps) */}
+      {/* Studio Mastered Broadcast Voiceover (Brian Multilingual + Whisper 1:1) */}
       <Audio src={staticFile("voiceover.mp3")} />
 
-      {/* 100% Real Full-Screen Evidence Scenes (Mapped 1:1 to Spoken Words, Zero Flicker, Zero Distractions) */}
-      <Gemini4ProRealScenes />
+      {/* DevDay 2026 Hard Evidence Scenes (Project o, $500 Pro Max, Rogue Agents, Cerebras Silicon) */}
+      <DevDay2026Scenes />
     </AbsoluteFill>
   );
 };

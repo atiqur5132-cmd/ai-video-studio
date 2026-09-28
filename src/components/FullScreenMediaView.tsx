@@ -25,13 +25,33 @@ export const FullScreenMediaView: React.FC<FullScreenMediaViewProps> = ({ mediaS
         alignItems: "center",
       }}
     >
-      {/* Dynamic Ambient Blurred Background to eliminate empty black voids */}
+      {/* Zero-Flicker Ambient Backing */}
       <div
         style={{
           position: "absolute",
-          inset: -40,
-          overflow: "hidden",
+          inset: 0,
+          background:
+            "radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.12) 0%, #030712 80%)",
           pointerEvents: "none",
+        }}
+      />
+
+      {/* Foreground Crisp Media in Canonical 16:9 Dossier */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          width: 1720,
+          height: 960,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 20,
+          border: "1.5px solid rgba(56, 189, 248, 0.35)",
+          background: "rgba(9, 14, 26, 0.9)",
+          boxShadow: "0 30px 100px rgba(0, 0, 0, 0.95), 0 0 50px rgba(14, 165, 233, 0.15)",
+          overflow: "hidden",
+          boxSizing: "border-box",
         }}
       >
         <Img
@@ -39,36 +59,11 @@ export const FullScreenMediaView: React.FC<FullScreenMediaViewProps> = ({ mediaS
           style={{
             width: "100%",
             height: "100%",
-            objectFit: "cover",
-            filter: "blur(45px) brightness(0.35) saturate(1.2)",
-            transform: "scale(1.15)",
-          }}
-        />
-      </div>
-
-      {/* Foreground Crisp Media */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: "100%",
-          maxHeight: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          boxShadow: "0 25px 80px rgba(0, 0, 0, 0.9)",
-        }}
-      >
-        <Img
-          src={resolvedSrc}
-          style={{
-            maxWidth: "1920px",
-            maxHeight: "1080px",
-            width: "auto",
-            height: "auto",
             objectFit: "contain",
-            borderRadius: 8,
             display: "block",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "translate3d(0, 0, 0)",
           }}
         />
       </div>

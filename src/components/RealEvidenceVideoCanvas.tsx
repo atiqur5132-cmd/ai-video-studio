@@ -53,38 +53,17 @@ export const RealEvidenceVideoCanvas: React.FC<RealEvidenceVideoCanvasProps> = (
         fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
     >
-      {/* 1. Dynamic Synchronous Blurred Mirror Canvas (Zero Black Void) */}
+      {/* 1. Zero-Overhead Ambient Radial Canvas (Single Decoder Standard, Zero Duplicate Video Lag) */}
       <div
         style={{
           position: "absolute",
-          inset: -40,
-          overflow: "hidden",
+          inset: 0,
+          background:
+            "radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.95) 0%, #000000 85%)",
           pointerEvents: "none",
           zIndex: 0,
         }}
-      >
-        <Video
-          src={safeStatic(videoSrc)}
-          muted
-          volume={0}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "blur(55px) brightness(0.28) saturate(1.3)",
-            transform: "scale(1.25)",
-          }}
-        />
-        {/* Cinematic Radial Vignette */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(circle at 50% 50%, rgba(2, 6, 23, 0.25) 0%, rgba(2, 4, 10, 0.94) 85%)",
-          }}
-        />
-      </div>
+      />
 
       {/* 2. Primary Evidence Video Container (Clean, zero top text/URL bar, zero tilt) */}
       <div
@@ -108,6 +87,7 @@ export const RealEvidenceVideoCanvas: React.FC<RealEvidenceVideoCanvasProps> = (
       >
         <Video
           src={safeStatic(videoSrc)}
+          loop
           muted
           volume={0}
           style={{
@@ -116,6 +96,9 @@ export const RealEvidenceVideoCanvas: React.FC<RealEvidenceVideoCanvasProps> = (
             objectFit: isVertical ? "cover" : "contain",
             backgroundColor: "#000000",
             display: "block",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "translate3d(0, 0, 0)",
           }}
         />
       </div>

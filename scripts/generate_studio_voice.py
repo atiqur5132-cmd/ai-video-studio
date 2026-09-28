@@ -21,19 +21,16 @@ VOICE = "en-US-BrianMultilingualNeural"
 async def generate_voice():
     print(f"=== GENERATING STUDIO-GRADE VOICEOVER VIA EDGE-TTS ({VOICE}) ===")
     
-    if not os.path.exists(RAW_AUDIO_PATH):
-        with open(VOICEOVER_TXT, "r", encoding="utf-8") as f:
-            text = f.read()
+    with open(VOICEOVER_TXT, "r", encoding="utf-8") as f:
+        text = f.read()
 
-        clean_text = text.replace("<short pause>", "... ").replace("[excited]", "").replace("[curious]", "").replace("[amazed]", "")
-        print(f"Script character count: {len(clean_text)} characters (~{len(clean_text.split())} words)")
-        print(f"Generating raw audio to: {RAW_AUDIO_PATH}...")
+    clean_text = text.replace("<short pause>", "... ").replace("[excited]", "").replace("[curious]", "").replace("[amazed]", "")
+    print(f"Script character count: {len(clean_text)} characters (~{len(clean_text.split())} words)")
+    print(f"Generating raw audio to: {RAW_AUDIO_PATH}...")
 
-        communicate = edge_tts.Communicate(clean_text, VOICE, rate="+4%")
-        await communicate.save(RAW_AUDIO_PATH)
-        print("[OK] Raw Edge-TTS audio generated successfully!")
-    else:
-        print(f"[OK] Raw audio already exists: {RAW_AUDIO_PATH}")
+    communicate = edge_tts.Communicate(clean_text, VOICE, rate="+3%")
+    await communicate.save(RAW_AUDIO_PATH)
+    print("[OK] Raw Edge-TTS audio generated successfully!")
 
     # FFmpeg Broadcast Mastering
     print("[MASTERING] Applying studio broadcast mastering chain...")
@@ -46,15 +43,28 @@ async def generate_voice():
         "loudnorm=I=-14:TP=-1.0:LRA=9"
     )
 
-    cmd = [
+    cmd_wav = [
         FFMPEG_BIN,
         "-i", RAW_AUDIO_PATH,
         "-af", mastering_filter,
         MASTERED_WAV_PATH,
         "-y"
     ]
-    subprocess.run(cmd, check=True)
+    subprocess.run(cmd_wav, check=True)
     print(f"[OK] Mastered radio-ready audio saved to: {MASTERED_WAV_PATH}")
+
+    # Also export voiceover.mp3 for Remotion staticFile
+    mastered_mp3_path = os.path.join(STUDIO_DIR, "public", "voiceover.mp3")
+    cmd_mp3 = [
+        FFMPEG_BIN,
+        "-i", MASTERED_WAV_PATH,
+        "-c:a", "libmp3lame",
+        "-b:a", "192k",
+        mastered_mp3_path,
+        "-y"
+    ]
+    subprocess.run(cmd_mp3, check=True)
+    print(f"[OK] Mastered MP3 saved to: {mastered_mp3_path}")
 
     # Run Whisper for word-level sync
     print("[WHISPER] Running faster-whisper for 1:1 timestamps.json...")

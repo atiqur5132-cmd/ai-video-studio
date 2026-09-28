@@ -10,15 +10,15 @@ export const Thumbnail: React.FC = () => {
         fontFamily: "'Montserrat', 'Inter', system-ui, -apple-system, sans-serif",
       }}
     >
-      {/* 1. Background: Dynamic Blurred Mirror of Real Leak Asset */}
+      {/* 1. Background: Dynamic Volumetric Glow */}
       <div style={{ position: "absolute", inset: -20, zIndex: 0, overflow: "hidden" }}>
         <Img
-          src={staticFile("evidence/screenshots/floatplane_physics_opus55_desktop.png")}
+          src={staticFile("evidence/devday2026/devday_keynote_official.png")}
           style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "blur(40px) brightness(0.25) saturate(1.5)",
+            filter: "blur(40px) brightness(0.22) saturate(1.4)",
             transform: "scale(1.2)",
           }}
         />
@@ -27,12 +27,12 @@ export const Thumbnail: React.FC = () => {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(circle at 65% 50%, rgba(14, 165, 233, 0.25) 0%, rgba(2, 4, 10, 0.95) 80%)",
+              "radial-gradient(circle at 65% 50%, rgba(249, 115, 22, 0.25) 0%, rgba(2, 4, 10, 0.95) 80%)",
           }}
         />
       </div>
 
-      {/* 2. Outer Neon Documentary Frame */}
+      {/* 2. Outer Neon Frame */}
       <div
         style={{
           position: "absolute",
@@ -40,9 +40,9 @@ export const Thumbnail: React.FC = () => {
           left: 24,
           right: 24,
           bottom: 24,
-          border: "4px solid rgba(56, 189, 248, 0.6)",
+          border: "4px solid rgba(249, 115, 22, 0.6)",
           borderRadius: 24,
-          boxShadow: "0 0 50px rgba(56, 189, 248, 0.3), inset 0 0 30px rgba(56, 189, 248, 0.15)",
+          boxShadow: "0 0 50px rgba(249, 115, 22, 0.3), inset 0 0 30px rgba(249, 115, 22, 0.15)",
           zIndex: 40,
           pointerEvents: "none",
         }}
@@ -52,16 +52,16 @@ export const Thumbnail: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          right: 80,
+          right: 60,
           top: "50%",
-          transform: "translateY(-50%) perspective(1200px) rotateY(-8deg) rotateX(4deg) scale(0.95)",
-          width: 860,
-          height: 820,
+          transform: "translateY(-50%) perspective(1200px) rotateY(-8deg) rotateX(3deg) scale(0.95)",
+          width: 900,
+          height: 620,
           borderRadius: 20,
           overflow: "hidden",
-          border: "2px solid rgba(56, 189, 248, 0.4)",
-          backgroundColor: "#000000",
-          boxShadow: "0 40px 100px rgba(0, 0, 0, 0.95), 0 0 60px rgba(14, 165, 233, 0.3)",
+          border: "2px solid rgba(249, 115, 22, 0.5)",
+          backgroundColor: "#0d1117",
+          boxShadow: "0 40px 100px rgba(0, 0, 0, 0.95), 0 0 60px rgba(249, 115, 22, 0.35)",
           zIndex: 10,
           display: "flex",
           flexDirection: "column",
@@ -70,7 +70,7 @@ export const Thumbnail: React.FC = () => {
         <div
           style={{
             height: 48,
-            background: "#090D16",
+            background: "#161b22",
             borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
             display: "flex",
             alignItems: "center",
@@ -78,14 +78,14 @@ export const Thumbnail: React.FC = () => {
             padding: "0 20px",
           }}
         >
-          <span style={{ color: "#38BDF8", fontSize: 13, fontWeight: 900, letterSpacing: "0.1em" }}>
-            ● LIVE SIGHTING • ARENA LEAK
+          <span style={{ color: "#f97316", fontSize: 13, fontWeight: 900, letterSpacing: "0.1em" }}>
+            ● CONFIDENTIAL LEAK • PRODUCTION REPO
           </span>
-          <span style={{ color: "#10B981", fontSize: 12, fontWeight: 800 }}>VERIFIED CHECKPOINT</span>
+          <span style={{ color: "#10B981", fontSize: 12, fontWeight: 800 }}>VERIFIED COMMIT</span>
         </div>
-        <div style={{ flex: 1, backgroundColor: "#02040A", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ flex: 1, backgroundColor: "#0d1117", display: "flex", alignItems: "center", justifyContent: "center", padding: "12px" }}>
           <Img
-            src={staticFile("evidence/screenshots/floatplane_physics_opus55_desktop.png")}
+            src={staticFile("evidence/devday2026/openai_codex_promax_commit.png")}
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         </div>
@@ -95,7 +95,7 @@ export const Thumbnail: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          left: 100,
+          left: 90,
           top: "50%",
           transform: "translateY(-50%)",
           zIndex: 20,
@@ -120,14 +120,14 @@ export const Thumbnail: React.FC = () => {
         >
           <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#EF4444", boxShadow: "0 0 12px #EF4444" }} />
           <span style={{ color: "#EF4444", fontSize: 16, fontWeight: 900, letterSpacing: "0.15em", textTransform: "uppercase" }}>
-            UNRELEASED FRONTIER MODEL
+            OPENAI DEVDAY 2026 LEAKS
           </span>
         </div>
 
         {/* Main Title 1 */}
         <h1
           style={{
-            fontSize: 104,
+            fontSize: 98,
             fontWeight: 900,
             lineHeight: 1.0,
             margin: 0,
@@ -136,22 +136,22 @@ export const Thumbnail: React.FC = () => {
             textShadow: "0 10px 40px rgba(0, 0, 0, 0.9)",
           }}
         >
-          GEMINI 4 <span style={{ color: "#38BDF8", textShadow: "0 0 45px rgba(56, 189, 248, 0.6)" }}>PRO</span>
+          $500 <span style={{ color: "#f97316", textShadow: "0 0 45px rgba(249, 115, 22, 0.6)" }}>PRO MAX</span>
         </h1>
 
         {/* Sub Punch */}
         <h2
           style={{
-            fontSize: 78,
+            fontSize: 74,
             fontWeight: 900,
             lineHeight: 1.05,
             margin: 0,
-            color: "#FACC15",
+            color: "#38bdf8",
             letterSpacing: "-0.02em",
-            textShadow: "0 0 35px rgba(250, 204, 21, 0.5)",
+            textShadow: "0 0 35px rgba(56, 189, 248, 0.5)",
           }}
         >
-          HUGE ARENA LEAK
+          & PROJECT "o" AGENT
         </h2>
 
         {/* Third Line Metric Box */}
@@ -169,13 +169,13 @@ export const Thumbnail: React.FC = () => {
           }}
         >
           <div>
-            <div style={{ color: "#94A3B8", fontSize: 13, fontWeight: 700, letterSpacing: "0.08em" }}>ARC-AGI-2 REASONING</div>
-            <div style={{ color: "#10B981", fontSize: 36, fontWeight: 900, textShadow: "0 0 20px #10B981" }}>77.1% SOTA</div>
+            <div style={{ color: "#94A3B8", fontSize: 13, fontWeight: 700, letterSpacing: "0.08em" }}>AUTONOMOUS EXECUTION</div>
+            <div style={{ color: "#10B981", fontSize: 34, fontWeight: 900, textShadow: "0 0 20px #10B981" }}>24/7 BACKGROUND</div>
           </div>
           <div style={{ width: 1, height: 44, backgroundColor: "rgba(255, 255, 255, 0.15)" }} />
           <div>
-            <div style={{ color: "#94A3B8", fontSize: 13, fontWeight: 700, letterSpacing: "0.08em" }}>CONTEXT LIMIT</div>
-            <div style={{ color: "#38BDF8", fontSize: 36, fontWeight: 900 }}>2,000,000</div>
+            <div style={{ color: "#94A3B8", fontSize: 13, fontWeight: 700, letterSpacing: "0.08em" }}>CEREBRAS SILICON</div>
+            <div style={{ color: "#f97316", fontSize: 34, fontWeight: 900 }}>14X SPEEDUP</div>
           </div>
         </div>
       </div>
