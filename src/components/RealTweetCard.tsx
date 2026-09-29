@@ -1,5 +1,5 @@
 import React from "react";
-import { Img, staticFile } from "remotion";
+import { Img, staticFile, spring, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 interface RealTweetCardProps {
   authorName: string;
@@ -28,101 +28,150 @@ export const RealTweetCard: React.FC<RealTweetCardProps> = ({
   highlightedText,
   mediaSrc,
   stats = { replies: "1.4K", reposts: "8.9K", likes: "42K", views: "1.8M" },
-  highlightColor = "rgba(250, 204, 21, 0.35)",
+  highlightColor = "#EF4444",
 }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const entrance = spring({
+    frame,
+    fps,
+    config: { damping: 15, stiffness: 100 },
+  });
+
+  const cameraZoom = interpolate(frame, [0, 180], [1.0, 1.05], {
+    extrapolateRight: "clamp",
+  });
+
+  // Staggered highlight sweep
+  const highlightProgress = interpolate(frame, [15, 55], [0, 100], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
   return (
     <div
       style={{
-        flex: 1,
+        width: 1920,
+        height: 1080,
+        backgroundColor: "#020408",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
-        padding: "30px 40px",
+        justifyContent: "center",
+        position: "relative",
+        overflow: "hidden",
+        perspective: 1200,
       }}
     >
+      {/* Studio Radial Glow */}
       <div
         style={{
-          width: "100%",
-          maxWidth: 1380,
-          backgroundColor: "#000000",
-          border: "1.5px solid #2F3336",
-          borderRadius: 20,
-          padding: "32px 40px",
+          position: "absolute",
+          width: 1400,
+          height: 700,
+          top: "15%",
+          borderRadius: "50%",
+          background: `radial-gradient(ellipse at center, ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.16)" : "rgba(29, 155, 240, 0.16)"} 0%, transparent 65%)`,
+          filter: "blur(90px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Main Tweet Dossier Card */}
+      <div
+        style={{
+          width: 1640,
+          backgroundColor: "#070B14",
+          border: "1.5px solid rgba(255, 255, 255, 0.12)",
+          borderRadius: 24,
+          padding: "40px 54px",
           color: "#E7E9EA",
           fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-          boxShadow: "0 10px 40px rgba(0, 0, 0, 0.5)",
+          boxShadow: `0 35px 90px rgba(0, 0, 0, 0.95), 0 0 50px ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.15)" : "rgba(29, 155, 240, 0.15)"}`,
+          transform: `scale(${entrance * cameraZoom}) rotateX(2deg) translateY(-55px)`,
+          zIndex: 15,
         }}
       >
         {/* Tweet Author Header */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
-          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
+          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
             {/* Avatar */}
             {avatarImg ? (
               <Img
-                src={avatarImg.startsWith('http') ? avatarImg : staticFile(avatarImg)}
-                style={{ width: 56, height: 56, borderRadius: "50%", objectFit: "cover" }}
+                src={staticFile(avatarImg)}
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "2px solid rgba(255, 255, 255, 0.2)",
+                }}
               />
             ) : (
               <div
                 style={{
-                  width: 56,
-                  height: 56,
+                  width: 64,
+                  height: 64,
                   borderRadius: "50%",
                   backgroundColor: avatarBg,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontWeight: 800,
-                  fontSize: 22,
+                  fontWeight: 900,
+                  fontSize: 24,
                   color: "#FFFFFF",
+                  boxShadow: `0 0 20px ${avatarBg}66`,
                 }}
               >
                 {avatarText}
               </div>
             )}
 
-            {/* Name & Handle */}
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: 22, fontWeight: 800, color: "#F7F9F9" }}>{authorName}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontSize: 26, fontWeight: 800, color: "#FFFFFF" }}>{authorName}</span>
                 {isVerified && (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="#1D9BF0">
-                    <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.79 5.21l-4.24-4.24 1.41-1.41 2.83 2.83 6.36-6.36 1.41 1.41-7.77 7.77z" />
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                   </svg>
                 )}
               </div>
-              <div style={{ fontSize: 16, color: "#71767B" }}>@{authorHandle}</div>
+              <div style={{ fontSize: 16, color: "#94A3B8", marginTop: 2 }}>
+                @{authorHandle} • <span style={{ color: "#64748B" }}>{dateStr}</span>
+              </div>
             </div>
           </div>
 
-          {/* X Logo */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#71767B">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          {/* X Official Monogram */}
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#94A3B8">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
         </div>
 
-        {/* Tweet Body Text */}
+        {/* Tweet Body Text with Highlighter Sweep */}
         <div
           style={{
-            fontSize: 26,
+            fontSize: 32,
             lineHeight: 1.55,
-            color: "#E7E9EA",
-            whiteSpace: "pre-wrap",
-            marginBottom: 24,
-            fontWeight: 400,
+            color: "#F1F5F9",
+            fontWeight: 500,
+            marginBottom: 28,
           }}
         >
-          {highlightedText && tweetText.includes(highlightedText) ? (
+          {highlightedText ? (
             <>
               {tweetText.split(highlightedText)[0]}
               <span
                 style={{
-                  backgroundColor: highlightColor,
+                  position: "relative",
+                  display: "inline",
                   color: "#FFFFFF",
-                  padding: "2px 8px",
+                  fontWeight: 800,
+                  padding: "4px 8px",
                   borderRadius: 6,
-                  borderBottom: "3px solid #FACC15",
-                  fontWeight: 600,
+                  background: `linear-gradient(90deg, ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.45)" : "rgba(250, 204, 21, 0.45)"} ${highlightProgress}%, transparent ${highlightProgress}%)`,
+                  boxShadow: highlightProgress > 10 ? `0 0 25px ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.4)" : "rgba(250, 204, 21, 0.4)"}` : "none",
                 }}
               >
                 {highlightedText}
@@ -134,55 +183,41 @@ export const RealTweetCard: React.FC<RealTweetCardProps> = ({
           )}
         </div>
 
-        {/* Embedded Media if available */}
+        {/* Embedded Media if provided */}
         {mediaSrc && (
           <div
             style={{
-              marginBottom: 20,
+              width: "100%",
+              height: 280,
               borderRadius: 16,
               overflow: "hidden",
-              border: "1.5px solid #2F3336",
-              maxHeight: 460,
-              display: "flex",
-              justifyContent: "center",
-              backgroundColor: "#08090C",
+              marginBottom: 24,
+              border: "1px solid rgba(255, 255, 255, 0.1)",
             }}
           >
-            <Img
-              src={mediaSrc.startsWith('http') ? mediaSrc : staticFile(mediaSrc)}
-              style={{ width: "100%", height: "auto", objectFit: "contain" }}
-            />
+            <Img src={staticFile(mediaSrc)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
         )}
 
-        {/* Date & Source */}
-        <div style={{ fontSize: 16, color: "#71767B", paddingBottom: 16, borderBottom: "1px solid #2F3336" }}>
-          <span>10:42 AM · {dateStr}</span> · <span style={{ color: "#1D9BF0" }}>X for Mac</span>
-        </div>
-
-        {/* Engagement Stats Bar */}
+        {/* Metrics Row */}
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingTop: 16,
+            gap: 40,
+            paddingTop: 18,
+            borderTop: "1px solid rgba(255, 255, 255, 0.08)",
             fontSize: 16,
-            color: "#71767B",
-            fontWeight: 600,
+            color: "#94A3B8",
           }}
         >
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <span>💬</span> <span>{stats.replies}</span>
+          <div>
+            <strong style={{ color: "#FFFFFF", fontSize: 18, marginRight: 6 }}>{stats.reposts}</strong> Reposts
           </div>
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <span>🔁</span> <span>{stats.reposts}</span>
+          <div>
+            <strong style={{ color: "#FFFFFF", fontSize: 18, marginRight: 6 }}>{stats.likes}</strong> Likes
           </div>
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <span>❤️</span> <span>{stats.likes}</span>
-          </div>
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <span>📊</span> <span>{stats.views}</span>
+          <div>
+            <strong style={{ color: "#FFFFFF", fontSize: 18, marginRight: 6 }}>{stats.views}</strong> Views
           </div>
         </div>
       </div>

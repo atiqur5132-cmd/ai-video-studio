@@ -18,19 +18,65 @@ TRANSCRIBE_SCRIPT = os.path.join(SCRIPT_DIR, "transcribe.py")
 
 VOICE = "en-US-BrianMultilingualNeural"
 
+async def generate_chunk(text, output_file):
+    communicate = edge_tts.Communicate(text, VOICE, rate="+3%")
+    await communicate.save(output_file)
+
 async def generate_voice():
     print(f"=== GENERATING STUDIO-GRADE VOICEOVER VIA EDGE-TTS ({VOICE}) ===")
     
     with open(VOICEOVER_TXT, "r", encoding="utf-8") as f:
-        text = f.read()
+        full_text = f.read()
 
-    clean_text = text.replace("<short pause>", "... ").replace("[excited]", "").replace("[curious]", "").replace("[amazed]", "")
-    print(f"Script character count: {len(clean_text)} characters (~{len(clean_text.split())} words)")
-    print(f"Generating raw audio to: {RAW_AUDIO_PATH}...")
+    # Split into clean paragraphs
+    paragraphs = [p.strip() for p in full_text.split("\n\n") if p.strip()]
+    print(f"Total script paragraphs: {len(paragraphs)}, Total words: ~{len(full_text.split())}")
 
-    communicate = edge_tts.Communicate(clean_text, VOICE, rate="+3%")
-    await communicate.save(RAW_AUDIO_PATH)
-    print("[OK] Raw Edge-TTS audio generated successfully!")
+    temp_dir = os.path.join(STUDIO_DIR, "public", "temp_chunks")
+    os.makedirs(temp_dir, exist_ok=True)
+
+    chunk_files = []
+    concat_list_path = os.path.join(temp_dir, "concat_list.txt")
+
+    for idx, p in enumerate(paragraphs):
+        chunk_file = os.path.join(temp_dir, f"chunk_{idx:03d}.mp3")
+        chunk_files.append(chunk_file)
+        clean_chunk = p.replace("<short pause>", "... ").replace("[excited]", "").replace("[curious]", "").replace("[amazed]", "")
+        print(f"  [Chunk {idx+1}/{len(paragraphs)}] Generating {len(clean_chunk.split())} words...")
+        
+        # Retry logic if needed
+        success = False
+        for attempt in range(3):
+            try:
+                await generate_chunk(clean_chunk, chunk_file)
+                success = True
+                break
+            except Exception as e:
+                print(f"    Retry {attempt+1} on chunk {idx}: {e}")
+                await asyncio.sleep(1)
+        if not success:
+            raise RuntimeError(f"Failed to generate chunk {idx}")
+
+    # Write concat list
+    with open(concat_list_path, "w", encoding="utf-8") as f:
+        for cf in chunk_files:
+            # ffmpeg concat demuxer requires escaped forward slashes or safe paths
+            safe_path = cf.replace("\\", "/")
+            f.write(f"file '{safe_path}'\n")
+
+    # Concatenate all chunks with ffmpeg
+    print(f"Stitching {len(chunk_files)} audio chunks into: {RAW_AUDIO_PATH}...")
+    cmd_concat = [
+        FFMPEG_BIN,
+        "-f", "concat",
+        "-safe", "0",
+        "-i", concat_list_path,
+        "-c", "copy",
+        RAW_AUDIO_PATH,
+        "-y"
+    ]
+    subprocess.run(cmd_concat, check=True)
+    print("[OK] All chunks stitched successfully into raw_voiceover.mp3!")
 
     # FFmpeg Broadcast Mastering
     print("[MASTERING] Applying studio broadcast mastering chain...")

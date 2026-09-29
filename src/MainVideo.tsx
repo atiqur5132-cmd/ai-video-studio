@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { DevDay2026Scenes } from "./scenes/DevDay2026Scenes";
+import { AiYouTubeDocScenes } from "./scenes/AiYouTubeDocScenes";
 
 export const MainVideo: React.FC = () => {
   return (
@@ -8,8 +8,11 @@ export const MainVideo: React.FC = () => {
       {/* Studio Mastered Broadcast Voiceover (Brian Multilingual + Whisper 1:1) */}
       <Audio src={staticFile("voiceover.mp3")} />
 
-      {/* DevDay 2026 Hard Evidence Scenes (Project o, $500 Pro Max, Rogue Agents, Cerebras Silicon) */}
-      <DevDay2026Scenes />
+      {/* Subtle Ambient Cinematic BGM ducked at -24dB */}
+      <Audio src={staticFile("bgm.mp3")} volume={0.06} />
+
+      {/* Did AI Just Kill YouTube? - Complete 9-Act Documentary */}
+      <AiYouTubeDocScenes />
     </AbsoluteFill>
   );
 };

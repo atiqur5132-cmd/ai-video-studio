@@ -1,5 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
+import { OfficialLogoBadge } from "./components/OfficialLogoBadge";
 
 export const Thumbnail: React.FC = () => {
   return (
@@ -13,12 +14,12 @@ export const Thumbnail: React.FC = () => {
       {/* 1. Background: Dynamic Volumetric Glow */}
       <div style={{ position: "absolute", inset: -20, zIndex: 0, overflow: "hidden" }}>
         <Img
-          src={staticFile("evidence/devday2026/devday_keynote_official.png")}
+          src={staticFile("evidence/sonnet55/01b_anthropic_benchmark_table.png")}
           style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "blur(40px) brightness(0.22) saturate(1.4)",
+            filter: "blur(35px) brightness(0.25) saturate(1.4)",
             transform: "scale(1.2)",
           }}
         />
@@ -27,7 +28,7 @@ export const Thumbnail: React.FC = () => {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(circle at 65% 50%, rgba(249, 115, 22, 0.25) 0%, rgba(2, 4, 10, 0.95) 80%)",
+              "radial-gradient(circle at 65% 50%, rgba(0, 240, 255, 0.22) 0%, rgba(2, 4, 10, 0.95) 80%)",
           }}
         />
       </div>
@@ -40,9 +41,9 @@ export const Thumbnail: React.FC = () => {
           left: 24,
           right: 24,
           bottom: 24,
-          border: "4px solid rgba(249, 115, 22, 0.6)",
+          border: "4px solid rgba(0, 240, 255, 0.6)",
           borderRadius: 24,
-          boxShadow: "0 0 50px rgba(249, 115, 22, 0.3), inset 0 0 30px rgba(249, 115, 22, 0.15)",
+          boxShadow: "0 0 50px rgba(0, 240, 255, 0.3), inset 0 0 30px rgba(0, 240, 255, 0.15)",
           zIndex: 40,
           pointerEvents: "none",
         }}
@@ -58,124 +59,143 @@ export const Thumbnail: React.FC = () => {
           width: 900,
           height: 620,
           borderRadius: 20,
+          border: "2px solid rgba(0, 240, 255, 0.5)",
+          boxShadow: "0 30px 100px rgba(0,0,0,0.95), 0 0 60px rgba(0, 240, 255, 0.3)",
           overflow: "hidden",
-          border: "2px solid rgba(249, 115, 22, 0.5)",
-          backgroundColor: "#0d1117",
-          boxShadow: "0 40px 100px rgba(0, 0, 0, 0.95), 0 0 60px rgba(249, 115, 22, 0.35)",
-          zIndex: 10,
+          backgroundColor: "#090d16",
           display: "flex",
           flexDirection: "column",
+          zIndex: 10,
         }}
       >
         <div
           style={{
             height: 48,
-            background: "#161b22",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+            backgroundColor: "#0d1322",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "0 20px",
+            padding: "0 24px",
           }}
         >
-          <span style={{ color: "#f97316", fontSize: 13, fontWeight: 900, letterSpacing: "0.1em" }}>
-            ● CONFIDENTIAL LEAK • PRODUCTION REPO
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#00f0ff" }} />
+            <span style={{ color: "#00f0ff", fontSize: 13, fontWeight: 900, letterSpacing: "0.1em" }}>
+              ANTHROPIC OFFICIAL • BENCHMARK TABLE
+            </span>
+          </div>
+          <span style={{ color: "#10b981", fontSize: 13, fontWeight: 900 }}>
+            ● 70.6% VERIFIED LEAP
           </span>
-          <span style={{ color: "#10B981", fontSize: 12, fontWeight: 800 }}>VERIFIED COMMIT</span>
         </div>
-        <div style={{ flex: 1, backgroundColor: "#0d1117", display: "flex", alignItems: "center", justifyContent: "center", padding: "12px" }}>
+        <div style={{ flex: 1, padding: 16, backgroundColor: "#050811", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Img
-            src={staticFile("evidence/devday2026/openai_codex_promax_commit.png")}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            src={staticFile("evidence/sonnet55/01b_anthropic_benchmark_table.png")}
+            style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 8 }}
           />
         </div>
       </div>
 
-      {/* 4. Left Side: High-CTR Ultra Bold Punch Headlines */}
+      {/* 4. Left Side: High-CTR Kinetic Punch Hook */}
       <div
         style={{
           position: "absolute",
           left: 90,
           top: "50%",
           transform: "translateY(-50%)",
+          width: 820,
           zIndex: 20,
           display: "flex",
           flexDirection: "column",
-          gap: 16,
-          maxWidth: 820,
+          gap: 20,
         }}
       >
-        {/* Top Eyebrow Badge */}
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 12,
-            background: "rgba(239, 68, 68, 0.15)",
-            border: "1.5px solid #EF4444",
-            borderRadius: 30,
-            padding: "8px 24px",
-            alignSelf: "flex-start",
-          }}
-        >
-          <span style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#EF4444", boxShadow: "0 0 12px #EF4444" }} />
-          <span style={{ color: "#EF4444", fontSize: 16, fontWeight: 900, letterSpacing: "0.15em", textTransform: "uppercase" }}>
-            OPENAI DEVDAY 2026 LEAKS
-          </span>
+        {/* Urgent Alert Badge */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <OfficialLogoBadge logo="claude" size={54} glowColor="rgba(0, 240, 255, 0.8)" staticMode={true} />
+          <div
+            style={{
+              padding: "10px 22px",
+              borderRadius: 30,
+              backgroundColor: "rgba(0, 240, 255, 0.15)",
+              border: "1.5px solid #00f0ff",
+              boxShadow: "0 0 25px rgba(0, 240, 255, 0.4)",
+            }}
+          >
+            <span
+              style={{
+                fontSize: 16,
+                fontWeight: 900,
+                color: "#00f0ff",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+              }}
+            >
+              CLAUDE SONNET 5.5 DROPPED
+            </span>
+          </div>
         </div>
 
-        {/* Main Title 1 */}
-        <h1
-          style={{
-            fontSize: 98,
-            fontWeight: 900,
-            lineHeight: 1.0,
-            margin: 0,
-            color: "#FFFFFF",
-            letterSpacing: "-0.03em",
-            textShadow: "0 10px 40px rgba(0, 0, 0, 0.9)",
-          }}
-        >
-          $500 <span style={{ color: "#f97316", textShadow: "0 0 45px rgba(249, 115, 22, 0.6)" }}>PRO MAX</span>
-        </h1>
+        {/* Main Headline */}
+        <div>
+          <h1
+            style={{
+              fontSize: 88,
+              fontWeight: 900,
+              color: "#FFFFFF",
+              margin: 0,
+              lineHeight: 0.95,
+              letterSpacing: "-0.03em",
+              textShadow: "0 10px 40px rgba(0,0,0,0.9)",
+            }}
+          >
+            70.6% <span style={{ color: "#00f0ff" }}>TERMINAL</span>
+          </h1>
+          <h2
+            style={{
+              fontSize: 68,
+              fontWeight: 900,
+              color: "#f87171",
+              margin: "12px 0 0 0",
+              lineHeight: 1.0,
+              letterSpacing: "-0.02em",
+              textShadow: "0 0 40px rgba(239, 68, 68, 0.5)",
+            }}
+          >
+            BEATS OPUS 5.5!
+          </h2>
+        </div>
 
-        {/* Sub Punch */}
-        <h2
-          style={{
-            fontSize: 74,
-            fontWeight: 900,
-            lineHeight: 1.05,
-            margin: 0,
-            color: "#38bdf8",
-            letterSpacing: "-0.02em",
-            textShadow: "0 0 35px rgba(56, 189, 248, 0.5)",
-          }}
-        >
-          & PROJECT "o" AGENT
-        </h2>
-
-        {/* Third Line Metric Box */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 20,
-            marginTop: 14,
-            background: "rgba(15, 23, 42, 0.8)",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
-            borderRadius: 16,
-            padding: "16px 26px",
-            alignSelf: "flex-start",
-          }}
-        >
-          <div>
-            <div style={{ color: "#94A3B8", fontSize: 13, fontWeight: 700, letterSpacing: "0.08em" }}>AUTONOMOUS EXECUTION</div>
-            <div style={{ color: "#10B981", fontSize: 34, fontWeight: 900, textShadow: "0 0 20px #10B981" }}>24/7 BACKGROUND</div>
+        {/* 3 Metric Pills */}
+        <div style={{ display: "flex", gap: 14 }}>
+          <div
+            style={{
+              padding: "12px 20px",
+              borderRadius: 14,
+              backgroundColor: "rgba(16, 185, 129, 0.15)",
+              border: "1.5px solid #10b981",
+              color: "#10b981",
+              fontSize: 16,
+              fontWeight: 900,
+              letterSpacing: "0.05em",
+            }}
+          >
+            ★ $2 / M (HALF PRICE)
           </div>
-          <div style={{ width: 1, height: 44, backgroundColor: "rgba(255, 255, 255, 0.15)" }} />
-          <div>
-            <div style={{ color: "#94A3B8", fontSize: 13, fontWeight: 700, letterSpacing: "0.08em" }}>CEREBRAS SILICON</div>
-            <div style={{ color: "#f97316", fontSize: 34, fontWeight: 900 }}>14X SPEEDUP</div>
+          <div
+            style={{
+              padding: "12px 20px",
+              borderRadius: 14,
+              backgroundColor: "rgba(168, 85, 247, 0.15)",
+              border: "1.5px solid #a855f7",
+              color: "#a855f7",
+              fontSize: 16,
+              fontWeight: 900,
+              letterSpacing: "0.05em",
+            }}
+          >
+            ★ 80.1% OSWORLD
           </div>
         </div>
       </div>

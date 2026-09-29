@@ -1,7 +1,7 @@
 import React from 'react';
 import { Img, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
 
-export type LogoType = 'openai' | 'claude' | 'anthropic' | 'blender' | 'unreal' | 'xai' | 'google' | 'meta';
+export type LogoType = 'openai' | 'claude' | 'anthropic' | 'blender' | 'unreal' | 'xai' | 'google' | 'meta' | 'youtube' | 'gemini';
 
 interface OfficialLogoBadgeProps {
   logo: LogoType;
@@ -11,9 +11,15 @@ interface OfficialLogoBadgeProps {
   glowColor?: string;
   delay?: number;
   staticMode?: boolean;
+  fullCanvas?: boolean;
 }
 
 const LOGO_MAP: Record<LogoType, { file: string; defaultGlow: string; name: string }> = {
+  youtube: {
+    file: 'logos/youtube_logo.png',
+    defaultGlow: 'rgba(255, 0, 0, 0.7)',
+    name: 'YOUTUBE',
+  },
   openai: {
     file: 'logos/openai_logo.png',
     defaultGlow: 'rgba(16, 185, 129, 0.6)',
@@ -32,7 +38,12 @@ const LOGO_MAP: Record<LogoType, { file: string; defaultGlow: string; name: stri
   google: {
     file: 'logos/google_logo.png',
     defaultGlow: 'rgba(66, 133, 244, 0.7)',
-    name: 'GOOGLE DEEPMIND',
+    name: 'GOOGLE',
+  },
+  gemini: {
+    file: 'logos/gemini_logo.png',
+    defaultGlow: 'rgba(56, 189, 248, 0.7)',
+    name: 'GOOGLE GEMINI',
   },
   meta: {
     file: 'logos/meta_logo.png',
@@ -58,12 +69,13 @@ const LOGO_MAP: Record<LogoType, { file: string; defaultGlow: string; name: stri
 
 export const OfficialLogoBadge: React.FC<OfficialLogoBadgeProps> = ({
   logo,
-  size = 110,
+  size = 140,
   label,
   sublabel,
   glowColor,
   delay = 0,
   staticMode = false,
+  fullCanvas = true,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -75,10 +87,207 @@ export const OfficialLogoBadge: React.FC<OfficialLogoBadgeProps> = ({
     config: { damping: 14, stiffness: 120 },
   });
 
-  const floatY = Math.sin(frame / 20) * 6;
+  const floatY = Math.sin(frame / 20) * 8;
   const currentGlow = glowColor || LOGO_MAP[logo].defaultGlow;
   const displayName = label || LOGO_MAP[logo].name;
 
+  if (fullCanvas) {
+    const ringRot1 = frame * 1.5;
+    const ringRot2 = -frame * 1.0;
+    const actualSize = Math.max(size, 300);
+
+    return (
+      <div
+        style={{
+          width: 1840,
+          height: 1000,
+          backgroundColor: '#02050c',
+          borderRadius: 24,
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          boxShadow: '0 40px 120px rgba(0, 0, 0, 0.98)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          perspective: 1400,
+          opacity: scale,
+        }}
+      >
+        {/* 3D Perspective Grid Floor */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: -160,
+            width: 2400,
+            height: 750,
+            background: `
+              linear-gradient(to bottom, transparent, ${currentGlow} 50%, rgba(2, 5, 12, 0.95)),
+              repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255, 255, 255, 0.08) 40px),
+              repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255, 255, 255, 0.08) 40px)
+            `,
+            transform: 'perspective(600px) rotateX(68deg)',
+            pointerEvents: 'none',
+            opacity: 0.35,
+          }}
+        />
+
+        {/* Volumetric Radial Glow */}
+        <div
+          style={{
+            position: 'absolute',
+            width: 1300,
+            height: 900,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${currentGlow} 0%, transparent 65%)`,
+            filter: 'blur(80px)',
+            opacity: 0.25,
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Sleek Minimal Status Badge */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 48,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            padding: '8px 22px',
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: 100,
+            backdropFilter: 'blur(10px)',
+            zIndex: 20,
+          }}
+        >
+          <div
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              backgroundColor: '#38BDF8',
+              boxShadow: `0 0 12px ${currentGlow}`,
+            }}
+          />
+          <span
+            style={{
+              fontFamily: 'Montserrat, Inter, sans-serif',
+              fontSize: 13,
+              fontWeight: 800,
+              color: '#FFFFFF',
+              letterSpacing: 2.5,
+              textTransform: 'uppercase',
+            }}
+          >
+            {label}
+          </span>
+        </div>
+
+        {/* Center Grand 3D Logo Stage */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            transform: `translateY(${floatY - 45}px)`,
+            zIndex: 15,
+          }}
+        >
+          {/* Orbital Rings Container */}
+          <div
+            style={{
+              width: actualSize + 140,
+              height: actualSize + 140,
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 70%, transparent 100%)',
+              border: '2px solid rgba(255,255,255,0.15)',
+              boxShadow: `0 0 60px ${currentGlow}, inset 0 0 40px rgba(255,255,255,0.05)`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+            }}
+          >
+            {/* Outer Orbital Dashed Ring */}
+            <div
+              style={{
+                position: 'absolute',
+                width: actualSize + 220,
+                height: actualSize + 220,
+                borderRadius: '50%',
+                border: '1.5px solid rgba(56, 189, 248, 0.35)',
+                opacity: 0.6,
+                transform: `rotate(${ringRot1}deg)`,
+                pointerEvents: 'none',
+              }}
+            />
+
+            {/* Counter-Rotating Inner Ring */}
+            <div
+              style={{
+                position: 'absolute',
+                width: actualSize + 180,
+                height: actualSize + 180,
+                borderRadius: '50%',
+                border: '1.5px solid rgba(255, 255, 255, 0.2)',
+                transform: `rotate(${ringRot2}deg)`,
+                pointerEvents: 'none',
+              }}
+            />
+
+            {/* Official Transparent PNG Logo */}
+            <Img
+              src={staticFile(LOGO_MAP[logo].file)}
+              style={{
+                width: actualSize,
+                height: actualSize,
+                objectFit: 'contain',
+                filter: `drop-shadow(0 15px 35px ${currentGlow})`,
+              }}
+            />
+          </div>
+
+          {/* Title & Subtitle Badge */}
+          <div
+            style={{
+              marginTop: 28,
+              textAlign: 'center',
+            }}
+          >
+            <div
+              style={{
+                fontSize: 32,
+                fontWeight: 900,
+                color: '#FFFFFF',
+                letterSpacing: 2,
+                textShadow: '0 4px 20px rgba(0,0,0,0.9)',
+              }}
+            >
+              {displayName}
+            </div>
+            {sublabel && (
+              <div
+                style={{
+                  fontSize: 14,
+                  fontWeight: 800,
+                  color: '#38BDF8',
+                  letterSpacing: 2,
+                  marginTop: 6,
+                }}
+              >
+                {sublabel}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback Inline Badge
   return (
     <div
       style={{
@@ -104,7 +313,6 @@ export const OfficialLogoBadge: React.FC<OfficialLogoBadgeProps> = ({
           position: 'relative',
         }}
       >
-        {/* Real official downloaded transparent PNG */}
         <Img
           src={staticFile(LOGO_MAP[logo].file)}
           style={{
@@ -115,7 +323,6 @@ export const OfficialLogoBadge: React.FC<OfficialLogoBadgeProps> = ({
           }}
         />
 
-        {/* Outer orbital ring */}
         <div
           style={{
             position: 'absolute',

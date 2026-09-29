@@ -14,109 +14,202 @@ interface EvidenceDossierViewProps {
   glowColor?: string; // e.g. "#38bdf8" or "#f97316" or "#ef4444"
   badgeLabel?: string;
   badgeStatus?: string;
+  zoom?: number; // default 1.15 for bold, readable screenshots
+  zoomOrigin?: string; // e.g. "center 35%" or "center center"
+  objectPosition?: string;
 }
 
 export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
   mediaSrc,
   glowColor = "#38bdf8",
   badgeLabel = "AUTHENTIC EVIDENCE • PRIMARY SOURCE",
-  badgeStatus = "VERIFIED LEAK"
+  badgeStatus = "VERIFIED LEAK",
+  zoom = 1.15,
+  zoomOrigin = "center 35%",
+  objectPosition = "center center",
 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
 
-  // Subtle continuous cinematic camera push-in (Zero static frame)
-  const scale = interpolate(frame, [0, durationInFrames], [1.0, 1.03], {
+  // Subtle continuous cinematic camera push-in
+  const scale = interpolate(frame, [0, durationInFrames], [1.0, 1.025], {
     extrapolateRight: "clamp",
   });
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "#030712",
+        backgroundColor: "#02050c",
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
       }}
     >
-      {/* Dynamic Ambient Volumetric Glow */}
+      {/* Dynamic Ambient Volumetric Radial Glow */}
       <div
         style={{
           position: "absolute",
-          width: 1000,
+          width: 1200,
           height: 1000,
           borderRadius: "50%",
-          background: `radial-gradient(circle, ${glowColor}18 0%, rgba(3, 7, 18, 0.95) 75%)`,
-          filter: "blur(60px)",
+          background: `radial-gradient(circle, ${glowColor}22 0%, rgba(2, 5, 12, 0.98) 75%)`,
+          filter: "blur(80px)",
           pointerEvents: "none",
         }}
       />
 
-      {/* Sleek 16:9 Dossier Window - 100% Centered & Fully Visible */}
+      {/* Massive 16:9 Dossier Window (1760 x 890) - Dominates 92% of Canvas */}
       <div
         style={{
-          width: 1480,
-          height: 800,
-          borderRadius: 20,
+          width: 1760,
+          height: 890,
+          borderRadius: 24,
           overflow: "hidden",
-          border: `1.5px solid ${glowColor}50`,
-          backgroundColor: "#090d16",
-          boxShadow: `0 30px 100px rgba(0, 0, 0, 0.95), 0 0 50px ${glowColor}25`,
+          border: `1.5px solid ${glowColor}60`,
+          backgroundColor: "#070b14",
+          boxShadow: `0 35px 120px rgba(0, 0, 0, 0.98), 0 0 60px ${glowColor}30`,
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          transform: `translateY(-24px) scale(${scale})`,
+          transform: `translateY(-12px) scale(${scale})`,
           zIndex: 5,
         }}
       >
         {/* Top Header Pill */}
         <div
           style={{
-            height: 48,
-            backgroundColor: "#0d1322",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+            height: 52,
+            backgroundColor: "#0a0f1d",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "0 24px",
+            padding: "0 28px",
             flexShrink: 0,
+            zIndex: 10,
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: glowColor, boxShadow: `0 0 10px ${glowColor}` }} />
-            <span style={{ color: glowColor, fontSize: 13, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: "50%",
+                backgroundColor: glowColor,
+                boxShadow: `0 0 12px ${glowColor}`,
+              }}
+            />
+            <span
+              style={{
+                color: glowColor,
+                fontSize: 14,
+                fontWeight: 900,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                fontFamily: "Inter, sans-serif",
+              }}
+            >
               {badgeLabel}
             </span>
           </div>
-          <span style={{ color: "#10b981", fontSize: 12, fontWeight: 800, letterSpacing: "0.05em" }}>
+          <span
+            style={{
+              color: "#10b981",
+              fontSize: 13,
+              fontWeight: 900,
+              letterSpacing: "0.06em",
+              fontFamily: "monospace",
+            }}
+          >
             ● {badgeStatus}
           </span>
         </div>
 
-        {/* Media Container - Perfectly Centered, Zero Scroll Cutoff */}
+        {/* Media Container with Dynamic Blurred Ambient Mirror Background */}
         <div
           style={{
             flex: 1,
-            backgroundColor: "#050811",
+            backgroundColor: "#040711",
+            position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "16px 24px",
             overflow: "hidden",
           }}
         >
-          <Img
-            src={safeStatic(mediaSrc)}
+          {/* Layer 1: Blurred Ambient Mirror Background (fills all letterboxes with beautiful matching colors) */}
+          <div
             style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              width: "auto",
-              height: "auto",
-              objectFit: "contain",
-              display: "block",
-              borderRadius: 8,
+              position: "absolute",
+              inset: -20,
+              overflow: "hidden",
+              zIndex: 1,
             }}
-          />
+          >
+            <Img
+              src={safeStatic(mediaSrc)}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "blur(60px) brightness(0.25) saturate(1.4)",
+                transform: "scale(1.2)",
+              }}
+            />
+            {/* Subtle dark gradient overlay to keep foreground pop */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundColor: "rgba(4, 7, 17, 0.4)",
+              }}
+            />
+          </div>
+
+          {/* Layer 2: Foreground Crisp High-Res Media Container */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "16px 24px",
+              boxSizing: "border-box",
+            }}
+          >
+            <div
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                borderRadius: 14,
+                overflow: "hidden",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.5)",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Img
+                src={safeStatic(mediaSrc)}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "820px",
+                  width: "auto",
+                  height: "auto",
+                  objectFit: "contain",
+                  objectPosition,
+                  display: "block",
+                  transform: `scale(${zoom})`,
+                  transformOrigin: zoomOrigin,
+                  transition: "transform 0.3s ease",
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </AbsoluteFill>

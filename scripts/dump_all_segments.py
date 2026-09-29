@@ -3,6 +3,11 @@ import json
 with open('src/timestamps.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
-for s in data['segments']:
-    words_summary = " ".join([w['word'] for w in s['words']])
-    print(f"[{s['start']:6.2f}s - {s['end']:6.2f}s] ({int(s['start']*30):5d}-{int(s['end']*30):5d}f) #{s['id']:02d}: {words_summary}")
+lines = []
+for i, seg in enumerate(data['segments']):
+    lines.append(f"{i} [{seg['start']:.1f}s - {seg['end']:.1f}s]: {seg['text']}")
+
+with open('temp_all_segs.txt', 'w', encoding='utf-8') as f:
+    f.write('\n'.join(lines))
+
+print("Dumped", len(lines), "segments to temp_all_segs.txt")

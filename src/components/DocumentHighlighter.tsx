@@ -14,29 +14,26 @@ interface DocumentHighlighterProps {
 }
 
 export const DocumentHighlighter: React.FC<DocumentHighlighterProps> = ({
-  category = "OFFICIAL REPORT",
-  docTitle = "Anthropic R&D Automation Index",
-  sourceUrl = "anthropic.com/research/automation-index",
-  dateBadge = "SEPTEMBER 17, 2026",
-  preText = "As of August 2026, internal measurements indicate that Claude models now",
-  highlightText = "lead 26% of Anthropic's internal AI research and development",
-  postText = "representing a twenty-six-fold increase from less than 1% recorded in February 2026.",
-  statBadge = { label: "AI-LED WORKLOAD", value: "26% EXPLOSION" },
-  highlightColor = "#00F0FF",
+  category = "OFFICIAL AUDIT",
+  docTitle = "Platform Automation Report",
+  sourceUrl = "techcrunch.com/2026/08/ai-video-flood",
+  dateBadge = "AUGUST 2026",
+  preText = "Investigation confirms that thousands of newly registered channels are",
+  highlightText = "generating over 10,000 synthetic videos every single day",
+  postText = "using autonomous multimodal generation pipelines without human intervention.",
+  statBadge = { label: "DAILY INGESTION", value: "10K+ UPLOADS" },
+  highlightColor = "#EF4444",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   // Cinematic 3D camera push-in
-  const cameraZoom = interpolate(frame, [0, 120], [1.0, 1.08], {
-    extrapolateRight: "clamp",
-  });
-  const cameraPanY = interpolate(frame, [0, 120], [0, -15], {
+  const cameraZoom = interpolate(frame, [0, 150], [1.0, 1.05], {
     extrapolateRight: "clamp",
   });
 
   // Highlighter sweep progress
-  const highlightProgress = interpolate(frame, [25, 65], [0, 100], {
+  const highlightProgress = interpolate(frame, [15, 55], [0, 100], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -53,19 +50,36 @@ export const DocumentHighlighter: React.FC<DocumentHighlighterProps> = ({
         justifyContent: "center",
         alignItems: "center",
         perspective: 1200,
-        fontFamily: "system-ui, -apple-system, sans-serif",
+        backgroundColor: "#020408",
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
+      {/* Volumetric Studio Glow behind card */}
       <div
         style={{
+          position: "absolute",
           width: 1400,
-          transform: `scale(${cardEntrance * cameraZoom}) translateY(${cameraPanY}px) rotateY(-4deg) rotateX(2deg)`,
+          height: 700,
+          top: "15%",
+          borderRadius: "50%",
+          background: `radial-gradient(circle, ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.14)" : "rgba(56, 189, 248, 0.14)"} 0%, transparent 70%)`,
+          filter: "blur(90px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Main Document Dossier */}
+      <div
+        style={{
+          width: 1640,
+          maxHeight: 640,
+          transform: `scale(${cardEntrance * cameraZoom}) translateY(-55px) rotateX(2deg)`,
           transformOrigin: "center center",
-          background: "#080E1A",
-          border: "1px solid rgba(56, 189, 248, 0.25)",
+          background: "#070B14",
+          border: "1.5px solid rgba(255, 255, 255, 0.12)",
           borderRadius: 24,
-          padding: "44px 56px",
-          boxShadow: "0 35px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(14, 165, 233, 0.12)",
+          padding: "40px 54px",
+          boxShadow: `0 35px 90px rgba(0, 0, 0, 0.95), 0 0 50px ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.15)" : "rgba(56, 189, 248, 0.15)"}`,
           position: "relative",
           overflow: "hidden",
         }}
@@ -77,8 +91,8 @@ export const DocumentHighlighter: React.FC<DocumentHighlighterProps> = ({
             alignItems: "center",
             justifyContent: "space-between",
             borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
-            paddingBottom: 22,
-            marginBottom: 32,
+            paddingBottom: 20,
+            marginBottom: 28,
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -93,7 +107,7 @@ export const DocumentHighlighter: React.FC<DocumentHighlighterProps> = ({
                 border: "1px solid rgba(255, 255, 255, 0.1)",
                 borderRadius: 8,
                 padding: "6px 16px",
-                fontSize: 13,
+                fontSize: 14,
                 fontFamily: "monospace",
                 color: "#94A3B8",
                 display: "flex",
@@ -101,26 +115,27 @@ export const DocumentHighlighter: React.FC<DocumentHighlighterProps> = ({
                 gap: 8,
               }}
             >
-              <span style={{ color: "#38BDF8" }}>🔒</span> https://{sourceUrl}
+              <span style={{ color: "#10B981" }}>🔒</span>
+              https://{sourceUrl}
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <span
               style={{
-                fontSize: 11,
-                fontWeight: 800,
-                letterSpacing: "0.1em",
-                color: "#38BDF8",
                 background: "rgba(56, 189, 248, 0.12)",
-                border: "1px solid rgba(56, 189, 248, 0.3)",
-                padding: "4px 12px",
-                borderRadius: 999,
+                border: "1px solid rgba(56, 189, 248, 0.35)",
+                padding: "5px 14px",
+                borderRadius: 6,
+                fontSize: 12,
+                fontWeight: 800,
+                color: "#38BDF8",
+                letterSpacing: 2,
               }}
             >
               {category}
             </span>
-            <span style={{ fontSize: 12, color: "#64748B", fontFamily: "monospace" }}>
+            <span style={{ fontSize: 13, color: "#64748B", fontWeight: 700, letterSpacing: 1 }}>
               {dateBadge}
             </span>
           </div>
@@ -130,75 +145,65 @@ export const DocumentHighlighter: React.FC<DocumentHighlighterProps> = ({
         <h2
           style={{
             fontSize: 34,
-            fontWeight: 800,
-            color: "#F8FAFC",
-            letterSpacing: "-0.02em",
-            marginBottom: 28,
-            lineHeight: 1.25,
+            fontWeight: 900,
+            color: "#FFFFFF",
+            letterSpacing: -0.5,
+            marginBottom: 24,
+            display: "flex",
+            alignItems: "center",
+            gap: 14,
           }}
         >
+          <span style={{ color: highlightColor }}>■</span>
           {docTitle}
         </h2>
 
-        {/* Body Text with Neon Laser Highlighter Sweep */}
+        {/* Highlighted Quote Body (Vox Style) */}
         <div
           style={{
-            fontSize: 26,
-            lineHeight: 1.7,
-            color: "#94A3B8",
-            fontWeight: 450,
+            fontSize: 28,
+            lineHeight: 1.6,
+            color: "#CBD5E1",
+            fontWeight: 500,
+            marginBottom: 28,
+            letterSpacing: 0.2,
           }}
         >
-          <span>{preText} </span>
+          {preText}{" "}
           <span
             style={{
               position: "relative",
               display: "inline",
               color: "#FFFFFF",
               fontWeight: 800,
-              padding: "2px 6px",
-              margin: "0 2px",
+              padding: "4px 8px",
+              borderRadius: 6,
+              background: `linear-gradient(90deg, ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.45)" : "rgba(56, 189, 248, 0.45)"} ${highlightProgress}%, transparent ${highlightProgress}%)`,
+              boxShadow: highlightProgress > 10 ? `0 0 25px ${highlightColor === "#EF4444" ? "rgba(239, 68, 68, 0.35)" : "rgba(56, 189, 248, 0.35)"}` : "none",
             }}
           >
-            {/* The Highlighter Layer */}
-            <span
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                bottom: 0,
-                width: `${highlightProgress}%`,
-                background: `linear-gradient(90deg, rgba(0, 240, 255, 0.28) 0%, rgba(56, 189, 248, 0.35) 100%)`,
-                borderBottom: `3px solid ${highlightColor}`,
-                boxShadow: `0 0 20px ${highlightColor}66`,
-                borderRadius: 4,
-                zIndex: -1,
-                pointerEvents: "none",
-              }}
-            />
             {highlightText}
-          </span>
-          <span> {postText}</span>
+          </span>{" "}
+          {postText}
         </div>
 
-        {/* High-Impact Stat Pill Bottom */}
+        {/* Bottom Key Metric Stamp */}
         {statBadge && (
           <div
             style={{
-              marginTop: 36,
               display: "inline-flex",
               alignItems: "center",
-              gap: 16,
-              background: "rgba(15, 23, 42, 0.8)",
-              border: "1px solid rgba(56, 189, 248, 0.35)",
-              borderRadius: 14,
-              padding: "10px 22px",
+              gap: 12,
+              padding: "8px 20px",
+              borderRadius: 12,
+              backgroundColor: "rgba(255, 255, 255, 0.05)",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
             }}
           >
-            <span style={{ fontSize: 13, color: "#94A3B8", fontWeight: 600, letterSpacing: "0.05em" }}>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#94A3B8", letterSpacing: 1.5 }}>
               {statBadge.label}:
             </span>
-            <span style={{ fontSize: 18, color: "#38BDF8", fontWeight: 900, fontFamily: "monospace" }}>
+            <span style={{ fontSize: 16, fontWeight: 900, color: highlightColor, letterSpacing: 1 }}>
               {statBadge.value}
             </span>
           </div>
