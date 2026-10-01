@@ -1,85 +1,91 @@
-import asyncio
 import os
 import sys
 import subprocess
-import edge_tts
+import re
+import numpy as np
+import soundfile as sf
+import imageio_ffmpeg
+from kokoro_onnx import Kokoro
 
-# Force utf-8 stdout
+# Force UTF-8 stdout
 sys.stdout.reconfigure(encoding='utf-8')
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 STUDIO_DIR = os.path.dirname(SCRIPT_DIR)
 VOICEOVER_TXT = os.path.join(STUDIO_DIR, "src", "voiceover_script.txt")
-RAW_AUDIO_PATH = os.path.join(STUDIO_DIR, "public", "raw_voiceover.mp3")
+RAW_WAV_PATH = os.path.join(STUDIO_DIR, "public", "raw_voiceover.wav")
 MASTERED_WAV_PATH = os.path.join(STUDIO_DIR, "public", "voiceover.wav")
-FFMPEG_BIN = r"C:\Users\atiqu\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe"
-PYTHON_BIN = r"C:\Users\atiqu\AppData\Local\Python\bin\python.exe"
+MASTERED_MP3_PATH = os.path.join(STUDIO_DIR, "public", "voiceover.mp3")
 TRANSCRIBE_SCRIPT = os.path.join(SCRIPT_DIR, "transcribe.py")
 
-VOICE = "en-US-BrianMultilingualNeural"
+MODEL_DIR = r"C:\Users\atiqu\.gemini\antigravity\scratch\kokoro_models"
+MODEL_PATH = os.path.join(MODEL_DIR, "kokoro-v1.0.onnx")
+VOICES_PATH = os.path.join(MODEL_DIR, "voices-v1.0.bin")
 
-async def generate_chunk(text, output_file):
-    communicate = edge_tts.Communicate(text, VOICE, rate="+3%")
-    await communicate.save(output_file)
+# User-approved canonical documentary voice
+VOICE = "bm_fable"   # British Male - Cinematic & Dramatic (#5)
+LANG = "en-gb"
+SPEED = 1.0
 
-async def generate_voice():
-    print(f"=== GENERATING STUDIO-GRADE VOICEOVER VIA EDGE-TTS ({VOICE}) ===")
+def clean_text_chunk(text):
+    # Remove XML / bracket tags like <short pause>, [excited], etc.
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\[[^\]]+\]", " ", text)
+    # Normalize multiple spaces
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+def generate_voice():
+    print(f"=== GENERATING HIGH-RETENTION DOCUMENTARY VOICEOVER VIA KOKORO-82M ({VOICE}) ===")
     
+    if not os.path.exists(MODEL_PATH) or not os.path.exists(VOICES_PATH):
+        raise FileNotFoundError(f"Kokoro model files not found in {MODEL_DIR}")
+
+    print(f"Loading Kokoro model: {MODEL_PATH}...")
+    kokoro = Kokoro(MODEL_PATH, VOICES_PATH)
+
     with open(VOICEOVER_TXT, "r", encoding="utf-8") as f:
         full_text = f.read()
 
     # Split into clean paragraphs
-    paragraphs = [p.strip() for p in full_text.split("\n\n") if p.strip()]
+    raw_paragraphs = [p.strip() for p in full_text.split("\n\n") if p.strip()]
+    paragraphs = []
+    for p in raw_paragraphs:
+        cleaned = clean_text_chunk(p)
+        if cleaned:
+            paragraphs.append(cleaned)
+
     print(f"Total script paragraphs: {len(paragraphs)}, Total words: ~{len(full_text.split())}")
 
-    temp_dir = os.path.join(STUDIO_DIR, "public", "temp_chunks")
-    os.makedirs(temp_dir, exist_ok=True)
-
-    chunk_files = []
-    concat_list_path = os.path.join(temp_dir, "concat_list.txt")
+    all_audio_segments = []
+    target_sample_rate = 24000
+    # Natural 350ms pause between paragraphs for rhythmic documentary cadence
+    inter_paragraph_silence = np.zeros(int(target_sample_rate * 0.35), dtype=np.float32)
 
     for idx, p in enumerate(paragraphs):
-        chunk_file = os.path.join(temp_dir, f"chunk_{idx:03d}.mp3")
-        chunk_files.append(chunk_file)
-        clean_chunk = p.replace("<short pause>", "... ").replace("[excited]", "").replace("[curious]", "").replace("[amazed]", "")
-        print(f"  [Chunk {idx+1}/{len(paragraphs)}] Generating {len(clean_chunk.split())} words...")
-        
-        # Retry logic if needed
-        success = False
-        for attempt in range(3):
-            try:
-                await generate_chunk(clean_chunk, chunk_file)
-                success = True
-                break
-            except Exception as e:
-                print(f"    Retry {attempt+1} on chunk {idx}: {e}")
-                await asyncio.sleep(1)
-        if not success:
-            raise RuntimeError(f"Failed to generate chunk {idx}")
+        print(f"  [Paragraph {idx+1}/{len(paragraphs)}] Synthesizing ({len(p.split())} words)...")
+        try:
+            samples, sr = kokoro.create(p, voice=VOICE, speed=SPEED, lang=LANG)
+            target_sample_rate = sr
+            all_audio_segments.append(samples)
+            if idx < len(paragraphs) - 1:
+                all_audio_segments.append(inter_paragraph_silence)
+        except Exception as e:
+            print(f"    Error on paragraph {idx+1}: {e}")
+            raise
 
-    # Write concat list
-    with open(concat_list_path, "w", encoding="utf-8") as f:
-        for cf in chunk_files:
-            # ffmpeg concat demuxer requires escaped forward slashes or safe paths
-            safe_path = cf.replace("\\", "/")
-            f.write(f"file '{safe_path}'\n")
+    print(f"Concatenating all {len(paragraphs)} paragraphs...")
+    final_waveform = np.concatenate(all_audio_segments)
+    duration_sec = len(final_waveform) / target_sample_rate
+    print(f"Total raw audio generated: {duration_sec:.2f} seconds ({duration_sec/60:.2f} minutes).")
 
-    # Concatenate all chunks with ffmpeg
-    print(f"Stitching {len(chunk_files)} audio chunks into: {RAW_AUDIO_PATH}...")
-    cmd_concat = [
-        FFMPEG_BIN,
-        "-f", "concat",
-        "-safe", "0",
-        "-i", concat_list_path,
-        "-c", "copy",
-        RAW_AUDIO_PATH,
-        "-y"
-    ]
-    subprocess.run(cmd_concat, check=True)
-    print("[OK] All chunks stitched successfully into raw_voiceover.mp3!")
+    print(f"Saving raw WAV to: {RAW_WAV_PATH}...")
+    sf.write(RAW_WAV_PATH, final_waveform, target_sample_rate)
+    print("[OK] Raw audio written successfully!")
 
     # FFmpeg Broadcast Mastering
-    print("[MASTERING] Applying studio broadcast mastering chain...")
+    ffmpeg_bin = imageio_ffmpeg.get_ffmpeg_exe()
+    print(f"[MASTERING] Applying studio broadcast mastering chain via FFmpeg ({ffmpeg_bin})...")
     mastering_filter = (
         "highpass=f=80,"
         "equalizer=f=120:width_type=h:width=100:g=2.5,"
@@ -90,35 +96,40 @@ async def generate_voice():
     )
 
     cmd_wav = [
-        FFMPEG_BIN,
-        "-i", RAW_AUDIO_PATH,
+        ffmpeg_bin, "-y",
+        "-i", RAW_WAV_PATH,
         "-af", mastering_filter,
-        MASTERED_WAV_PATH,
-        "-y"
+        "-ar", "24000",
+        "-ac", "1",
+        MASTERED_WAV_PATH
     ]
     subprocess.run(cmd_wav, check=True)
-    print(f"[OK] Mastered radio-ready audio saved to: {MASTERED_WAV_PATH}")
+    print(f"[OK] Mastered WAV saved to: {MASTERED_WAV_PATH}")
 
-    # Also export voiceover.mp3 for Remotion staticFile
-    mastered_mp3_path = os.path.join(STUDIO_DIR, "public", "voiceover.mp3")
+    # Export MP3 version for Remotion
     cmd_mp3 = [
-        FFMPEG_BIN,
+        ffmpeg_bin, "-y",
         "-i", MASTERED_WAV_PATH,
         "-c:a", "libmp3lame",
         "-b:a", "192k",
-        mastered_mp3_path,
-        "-y"
+        MASTERED_MP3_PATH
     ]
     subprocess.run(cmd_mp3, check=True)
-    print(f"[OK] Mastered MP3 saved to: {mastered_mp3_path}")
+    print(f"[OK] Mastered MP3 saved to: {MASTERED_MP3_PATH}")
 
     # Run Whisper for word-level sync
-    print("[WHISPER] Running faster-whisper for 1:1 timestamps.json...")
+    print("[WHISPER] Running faster-whisper transcription for 1:1 timestamps.json...")
     try:
-        subprocess.run([PYTHON_BIN, TRANSCRIBE_SCRIPT], check=True)
-        print("[OK] Word-level timestamps generated successfully!")
+        cmd_transcribe = [
+            "uv", "run",
+            "--python", "3.11",
+            "--with", "faster-whisper",
+            "python", TRANSCRIBE_SCRIPT
+        ]
+        subprocess.run(cmd_transcribe, check=True)
+        print("[OK] 1:1 Word-level timestamps updated in timestamps.json!")
     except Exception as e:
-        print(f"[WARN] Whisper error: {e}")
+        print(f"[WARN] Whisper transcription note: {e}")
 
 if __name__ == "__main__":
-    asyncio.run(generate_voice())
+    generate_voice()

@@ -14,27 +14,36 @@ interface EvidenceDossierViewProps {
   glowColor?: string; // e.g. "#38bdf8" or "#f97316" or "#ef4444"
   badgeLabel?: string;
   badgeStatus?: string;
-  zoom?: number; // default 1.15 for bold, readable screenshots
+  zoom?: number; // default 1.0 (strict zero-crop)
   zoomOrigin?: string; // e.g. "center 35%" or "center center"
   objectPosition?: string;
+  panMode?: "none" | "slow-down" | "slow-up";
 }
 
 export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
   mediaSrc,
   glowColor = "#38bdf8",
   badgeLabel = "AUTHENTIC EVIDENCE • PRIMARY SOURCE",
-  badgeStatus = "VERIFIED LEAK",
-  zoom = 1.15,
-  zoomOrigin = "center 35%",
+  badgeStatus = "VERIFIED LAUNCH",
+  zoom = 1.0,
+  zoomOrigin = "center center",
   objectPosition = "center center",
+  panMode = "none",
 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
 
   // Subtle continuous cinematic camera push-in
-  const scale = interpolate(frame, [0, durationInFrames], [1.0, 1.025], {
+  const scale = interpolate(frame, [0, durationInFrames], [1.0, 1.02], {
     extrapolateRight: "clamp",
   });
+
+  // Smooth vertical pan if enabled (for long vertical tweets to inspect header then table)
+  const panOffset = panMode === "slow-down"
+    ? interpolate(frame, [0, durationInFrames], [0, -180], { extrapolateRight: "clamp" })
+    : panMode === "slow-up"
+    ? interpolate(frame, [0, durationInFrames], [-180, 0], { extrapolateRight: "clamp" })
+    : 0;
 
   return (
     <AbsoluteFill
@@ -49,38 +58,42 @@ export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
       <div
         style={{
           position: "absolute",
-          width: 1200,
+          width: 1300,
           height: 1000,
           borderRadius: "50%",
-          background: `radial-gradient(circle, ${glowColor}22 0%, rgba(2, 5, 12, 0.98) 75%)`,
-          filter: "blur(80px)",
+          background: `radial-gradient(circle, ${glowColor}25 0%, rgba(2, 5, 12, 0.98) 75%)`,
+          filter: "blur(90px)",
           pointerEvents: "none",
         }}
       />
 
-      {/* Massive 16:9 Dossier Window (1760 x 890) - Dominates 92% of Canvas */}
+      {/* 
+        Sleek 16:9 Dossier Window (1740 x 780)
+        Shifted up to translateY(-55px) so the bottom 210px of the 1080p canvas
+        is a dedicated, non-overlapping safety zone for KineticPunchText!
+      */}
       <div
         style={{
-          width: 1760,
-          height: 890,
-          borderRadius: 24,
+          width: 1740,
+          height: 780,
+          borderRadius: 22,
           overflow: "hidden",
-          border: `1.5px solid ${glowColor}60`,
+          border: `1.5px solid ${glowColor}70`,
           backgroundColor: "#070b14",
-          boxShadow: `0 35px 120px rgba(0, 0, 0, 0.98), 0 0 60px ${glowColor}30`,
+          boxShadow: `0 30px 100px rgba(0, 0, 0, 0.98), 0 0 50px ${glowColor}30`,
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          transform: `translateY(-12px) scale(${scale})`,
+          transform: `translateY(-55px) scale(${scale})`,
           zIndex: 5,
         }}
       >
         {/* Top Header Pill */}
         <div
           style={{
-            height: 52,
+            height: 48,
             backgroundColor: "#0a0f1d",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -92,8 +105,8 @@ export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <span
               style={{
-                width: 10,
-                height: 10,
+                width: 9,
+                height: 9,
                 borderRadius: "50%",
                 backgroundColor: glowColor,
                 boxShadow: `0 0 12px ${glowColor}`,
@@ -102,9 +115,9 @@ export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
             <span
               style={{
                 color: glowColor,
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: 900,
-                letterSpacing: "0.12em",
+                letterSpacing: "0.14em",
                 textTransform: "uppercase",
                 fontFamily: "Inter, sans-serif",
               }}
@@ -115,9 +128,9 @@ export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
           <span
             style={{
               color: "#10b981",
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: 900,
-              letterSpacing: "0.06em",
+              letterSpacing: "0.08em",
               fontFamily: "monospace",
             }}
           >
@@ -137,11 +150,11 @@ export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
             overflow: "hidden",
           }}
         >
-          {/* Layer 1: Blurred Ambient Mirror Background (fills all letterboxes with beautiful matching colors) */}
+          {/* Layer 1: Blurred Ambient Mirror Background (fills letterboxes with authentic matching colors) */}
           <div
             style={{
               position: "absolute",
-              inset: -20,
+              inset: -30,
               overflow: "hidden",
               zIndex: 1,
             }}
@@ -152,21 +165,20 @@ export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                filter: "blur(60px) brightness(0.25) saturate(1.4)",
-                transform: "scale(1.2)",
+                filter: "blur(70px) brightness(0.28) saturate(1.5)",
+                transform: "scale(1.25)",
               }}
             />
-            {/* Subtle dark gradient overlay to keep foreground pop */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: "rgba(4, 7, 17, 0.4)",
+                backgroundColor: "rgba(4, 7, 17, 0.45)",
               }}
             />
           </div>
 
-          {/* Layer 2: Foreground Crisp High-Res Media Container */}
+          {/* Layer 2: Foreground Crisp High-Res Media Container (Strict Zero Cropping) */}
           <div
             style={{
               position: "relative",
@@ -184,28 +196,28 @@ export const EvidenceDossierView: React.FC<EvidenceDossierViewProps> = ({
               style={{
                 maxWidth: "100%",
                 maxHeight: "100%",
-                borderRadius: 14,
-                overflow: "hidden",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.5)",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: 12,
+                overflow: panMode !== "none" ? "hidden" : "visible",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.85), 0 0 25px rgba(0,0,0,0.6)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                backgroundColor: "#070b14",
               }}
             >
               <Img
                 src={safeStatic(mediaSrc)}
                 style={{
                   maxWidth: "100%",
-                  maxHeight: "820px",
+                  maxHeight: "690px",
                   width: "auto",
                   height: "auto",
                   objectFit: "contain",
                   objectPosition,
                   display: "block",
-                  transform: `scale(${zoom})`,
+                  transform: `translateY(${panOffset}px) scale(${zoom})`,
                   transformOrigin: zoomOrigin,
-                  transition: "transform 0.3s ease",
                 }}
               />
             </div>
