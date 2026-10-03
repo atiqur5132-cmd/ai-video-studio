@@ -121,10 +121,8 @@ def generate_voice():
     print("[WHISPER] Running faster-whisper transcription for 1:1 timestamps.json...")
     try:
         cmd_transcribe = [
-            "uv", "run",
-            "--python", "3.11",
-            "--with", "faster-whisper",
-            "python", TRANSCRIBE_SCRIPT
+            sys.executable,
+            TRANSCRIBE_SCRIPT
         ]
         subprocess.run(cmd_transcribe, check=True)
         print("[OK] 1:1 Word-level timestamps updated in timestamps.json!")
