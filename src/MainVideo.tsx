@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { ThreeWayWarScenes } from "./scenes/ThreeWayWarScenes";
+import { AstraArgonWarScenes } from "./scenes/AstraArgonWarScenes";
 
 export const MainVideo: React.FC = () => {
   return (
@@ -11,8 +11,8 @@ export const MainVideo: React.FC = () => {
       {/* Subtle Ambient Cinematic BGM ducked at -24dB */}
       <Audio src={staticFile("bgm.mp3")} volume={0.06} />
 
-      {/* Gemini 4 Argon vs GPT-6.1 Sol vs Claude Sonnet 5.5 (Full 9m 9s Documentary) */}
-      <ThreeWayWarScenes />
+      {/* Why OpenAI Shelved GPT-6.1 Astra & DeepMind Locked Gemini 4 Argon (Full 8m 2s Documentary) */}
+      <AstraArgonWarScenes />
     </AbsoluteFill>
   );
 };

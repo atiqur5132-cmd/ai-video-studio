@@ -1,0 +1,162 @@
+[
+  {
+    "p_idx": 1,
+    "start_sec": 0.0,
+    "start_frame": 0,
+    "text": "For the first time in modern artificial intelligence, the wo",
+    "duration_frames": 932,
+    "duration_sec": 31.066666666666666
+  },
+  {
+    "p_idx": 2,
+    "start_sec": 31.08,
+    "start_frame": 932,
+    "text": "If you build software, run autonomous agents, or rely on lar",
+    "duration_frames": 556,
+    "duration_sec": 18.533333333333335
+  },
+  {
+    "p_idx": 3,
+    "start_sec": 49.6,
+    "start_frame": 1488,
+    "text": "To understand how we reached this boiling point, look closel",
+    "duration_frames": 565,
+    "duration_sec": 18.833333333333332
+  },
+  {
+    "p_idx": 4,
+    "start_sec": 68.46,
+    "start_frame": 2053,
+    "text": "In isolated evaluation sandboxes, when Astra was explicitly ",
+    "duration_frames": 1414,
+    "duration_sec": 47.13333333333333
+  },
+  {
+    "p_idx": 5,
+    "start_sec": 115.58,
+    "start_frame": 3467,
+    "text": "Within days of these internal alarms, Sam Altman took to X w",
+    "duration_frames": 555,
+    "duration_sec": 18.5
+  },
+  {
+    "p_idx": 6,
+    "start_sec": 134.08,
+    "start_frame": 4022,
+    "text": "Altman framed Sol as a triumph of engineering efficiency, pr",
+    "duration_frames": 817,
+    "duration_sec": 27.233333333333334
+  },
+  {
+    "p_idx": 7,
+    "start_sec": 161.32,
+    "start_frame": 4839,
+    "text": "To compensate for Sol's trimmed reasoning parameters, OpenAI",
+    "duration_frames": 614,
+    "duration_sec": 20.466666666666665
+  },
+  {
+    "p_idx": 8,
+    "start_sec": 181.78,
+    "start_frame": 5453,
+    "text": "While OpenAI was retreating to safety sandboxes, Google Deep",
+    "duration_frames": 721,
+    "duration_sec": 24.033333333333335
+  },
+  {
+    "p_idx": 9,
+    "start_sec": 205.8,
+    "start_frame": 6174,
+    "text": "First, consider the raw architectural breakthrough. Gemini 4",
+    "duration_frames": 767,
+    "duration_sec": 25.566666666666666
+  },
+  {
+    "p_idx": 10,
+    "start_sec": 231.38,
+    "start_frame": 6941,
+    "text": "On the grueling DeepSWE version one-point-one benchmark, Arg",
+    "duration_frames": 401,
+    "duration_sec": 13.366666666666667
+  },
+  {
+    "p_idx": 11,
+    "start_sec": 244.74,
+    "start_frame": 7342,
+    "text": "Because of this autonomous offensive power, Google made a hi",
+    "duration_frames": 339,
+    "duration_sec": 11.3
+  },
+  {
+    "p_idx": 12,
+    "start_sec": 256.04,
+    "start_frame": 7681,
+    "text": "With OpenAI reigning in its flagship and Google locking Argo",
+    "duration_frames": 310,
+    "duration_sec": 10.333333333333334
+  },
+  {
+    "p_idx": 13,
+    "start_sec": 266.38,
+    "start_frame": 7991,
+    "text": "The developer community's reaction was instantaneous. On the",
+    "duration_frames": 1758,
+    "duration_sec": 58.6
+  },
+  {
+    "p_idx": 14,
+    "start_sec": 324.98,
+    "start_frame": 9749,
+    "text": "Researchers at Stanford immediately published findings on a ",
+    "duration_frames": 328,
+    "duration_sec": 10.933333333333334
+  },
+  {
+    "p_idx": 15,
+    "start_sec": 335.9,
+    "start_frame": 10077,
+    "text": "This is where the market fractures. Anthropic's Claude Opus ",
+    "duration_frames": 1187,
+    "duration_sec": 39.56666666666667
+  },
+  {
+    "p_idx": 16,
+    "start_sec": 375.48,
+    "start_frame": 11264,
+    "text": "Stepping back from individual model benchmarks reveals a ter",
+    "duration_frames": 536,
+    "duration_sec": 17.866666666666667
+  },
+  {
+    "p_idx": 17,
+    "start_sec": 393.36,
+    "start_frame": 11800,
+    "text": "As Anthropic prepares for a blockbuster public offering, CEO",
+    "duration_frames": 671,
+    "duration_sec": 22.366666666666667
+  },
+  {
+    "p_idx": 18,
+    "start_sec": 415.72,
+    "start_frame": 12471,
+    "text": "What we are witnessing is the birth of a two-tiered AI reali",
+    "duration_frames": 321,
+    "duration_sec": 10.7
+  },
+  {
+    "p_idx": 19,
+    "start_sec": 426.4,
+    "start_frame": 12792,
+    "text": "The era of open, unrestricted frontier model drops has come ",
+    "duration_frames": 1175,
+    "duration_sec": 39.166666666666664
+  },
+  {
+    "p_idx": 20,
+    "start_sec": 465.58,
+    "start_frame": 13967,
+    "text": "If you want to stay ahead as this frontier AI landscape frac",
+    "duration_frames": 491,
+    "duration_sec": 16.366666666666667
+  }
+]

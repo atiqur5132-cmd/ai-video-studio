@@ -10,3 +10,4 @@ public/raw_*
 public/still_*
 public/stills/
 *.wav
+test_renders/
