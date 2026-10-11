@@ -1,11 +1,10 @@
 import os
 import sys
+import asyncio
 import subprocess
 import re
-import numpy as np
-import soundfile as sf
 import imageio_ffmpeg
-from kokoro_onnx import Kokoro
+import edge_tts
 
 # Force UTF-8 stdout
 sys.stdout.reconfigure(encoding='utf-8')
@@ -13,37 +12,26 @@ sys.stdout.reconfigure(encoding='utf-8')
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 STUDIO_DIR = os.path.dirname(SCRIPT_DIR)
 VOICEOVER_TXT = os.path.join(STUDIO_DIR, "src", "voiceover_script.txt")
+RAW_MP3_PATH = os.path.join(STUDIO_DIR, "public", "raw_voiceover.mp3")
 RAW_WAV_PATH = os.path.join(STUDIO_DIR, "public", "raw_voiceover.wav")
 MASTERED_WAV_PATH = os.path.join(STUDIO_DIR, "public", "voiceover.wav")
 MASTERED_MP3_PATH = os.path.join(STUDIO_DIR, "public", "voiceover.mp3")
 TRANSCRIBE_SCRIPT = os.path.join(SCRIPT_DIR, "transcribe.py")
 
-MODEL_DIR = r"C:\Users\atiqu\.gemini\antigravity\scratch\kokoro_models"
-MODEL_PATH = os.path.join(MODEL_DIR, "kokoro-v1.0.onnx")
-VOICES_PATH = os.path.join(MODEL_DIR, "voices-v1.0.bin")
-
-# User-approved canonical documentary voice
-VOICE = "bm_fable"   # British Male - Cinematic & Dramatic (#5)
-LANG = "en-gb"
-SPEED = 1.0
+# Canonical YouTube Tech Creator Voice
+VOICE = "en-US-ChristopherNeural"
+RATE = "+3%" # Energetic modern YouTube tech delivery
+PITCH = "+0Hz"
 
 def clean_text_chunk(text):
-    # Remove XML / bracket tags like <short pause>, [excited], etc.
     text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"\[[^\]]+\]", " ", text)
-    # Normalize multiple spaces
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
-def generate_voice():
-    print(f"=== GENERATING HIGH-RETENTION DOCUMENTARY VOICEOVER VIA KOKORO-82M ({VOICE}) ===")
+async def synthesize_script():
+    print(f"=== GENERATING TECH EXPLAINER VOICEOVER VIA EDGE NEURAL ({VOICE}) ===")
     
-    if not os.path.exists(MODEL_PATH) or not os.path.exists(VOICES_PATH):
-        raise FileNotFoundError(f"Kokoro model files not found in {MODEL_DIR}")
-
-    print(f"Loading Kokoro model: {MODEL_PATH}...")
-    kokoro = Kokoro(MODEL_PATH, VOICES_PATH)
-
     with open(VOICEOVER_TXT, "r", encoding="utf-8") as f:
         full_text = f.read()
 
@@ -56,42 +44,27 @@ def generate_voice():
             paragraphs.append(cleaned)
 
     print(f"Total script paragraphs: {len(paragraphs)}, Total words: ~{len(full_text.split())}")
+    
+    # We join paragraphs with natural SSML or slight pause if needed, or single communication
+    full_clean_script = "\n\n".join(paragraphs)
+    
+    print(f"Synthesizing script via Microsoft Neural Cloud ({len(full_clean_script.split())} words)...")
+    communicate = edge_tts.Communicate(full_clean_script, VOICE, rate=RATE, pitch=PITCH)
+    await communicate.save(RAW_MP3_PATH)
+    print(f"[OK] Raw audio generated: {RAW_MP3_PATH}")
 
-    all_audio_segments = []
-    target_sample_rate = 24000
-    # Natural 350ms pause between paragraphs for rhythmic documentary cadence
-    inter_paragraph_silence = np.zeros(int(target_sample_rate * 0.35), dtype=np.float32)
-
-    for idx, p in enumerate(paragraphs):
-        print(f"  [Paragraph {idx+1}/{len(paragraphs)}] Synthesizing ({len(p.split())} words)...")
-        try:
-            samples, sr = kokoro.create(p, voice=VOICE, speed=SPEED, lang=LANG)
-            target_sample_rate = sr
-            all_audio_segments.append(samples)
-            if idx < len(paragraphs) - 1:
-                all_audio_segments.append(inter_paragraph_silence)
-        except Exception as e:
-            print(f"    Error on paragraph {idx+1}: {e}")
-            raise
-
-    print(f"Concatenating all {len(paragraphs)} paragraphs...")
-    final_waveform = np.concatenate(all_audio_segments)
-    duration_sec = len(final_waveform) / target_sample_rate
-    print(f"Total raw audio generated: {duration_sec:.2f} seconds ({duration_sec/60:.2f} minutes).")
-
-    print(f"Saving raw WAV to: {RAW_WAV_PATH}...")
-    sf.write(RAW_WAV_PATH, final_waveform, target_sample_rate)
-    print("[OK] Raw audio written successfully!")
-
-    # FFmpeg Broadcast Mastering
+def post_process_audio():
     ffmpeg_bin = imageio_ffmpeg.get_ffmpeg_exe()
-    print(f"[MASTERING] Applying studio broadcast mastering chain via FFmpeg ({ffmpeg_bin})...")
+    print(f"[FFMPEG] Converting raw MP3 to WAV for mastering...")
+    subprocess.run([ffmpeg_bin, "-y", "-i", RAW_MP3_PATH, "-ar", "24000", "-ac", "1", RAW_WAV_PATH], check=True)
+
+    print(f"[MASTERING] Applying broadcast mastering chain via FFmpeg...")
     mastering_filter = (
         "highpass=f=80,"
-        "equalizer=f=120:width_type=h:width=100:g=2.5,"
-        "equalizer=f=800:width_type=h:width=200:g=-1.5,"
-        "equalizer=f=4500:width_type=h:width=2000:g=2.2,"
-        "acompressor=threshold=-18dB:ratio=3.2:attack=8:release=60,"
+        "equalizer=f=120:width_type=h:width=100:g=2.2,"
+        "equalizer=f=800:width_type=h:width=200:g=-1.2,"
+        "equalizer=f=4500:width_type=h:width=2000:g=2.0,"
+        "acompressor=threshold=-18dB:ratio=3.0:attack=8:release=60,"
         "loudnorm=I=-14:TP=-1.0:LRA=9"
     )
 
@@ -129,5 +102,9 @@ def generate_voice():
     except Exception as e:
         print(f"[WARN] Whisper transcription note: {e}")
 
+def main():
+    asyncio.run(synthesize_script())
+    post_process_audio()
+
 if __name__ == "__main__":
-    generate_voice()
+    main()
