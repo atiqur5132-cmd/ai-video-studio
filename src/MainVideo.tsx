@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { AiEscapeUnderOathScenes } from "./scenes/AiEscapeUnderOathScenes";
+import { Gemini4ArgonLeakScenes } from "./scenes/Gemini4ArgonLeakScenes";
 
 export const MainVideo: React.FC = () => {
   return (
@@ -11,8 +11,8 @@ export const MainVideo: React.FC = () => {
       {/* Subtle Ambient Cinematic BGM ducked at -24dB */}
       <Audio src={staticFile("bgm.mp3")} volume={0.06} />
 
-      {/* Under Oath: Big Tech Admits AI Escaped Containment (Full 7m 35s Investigative Documentary) */}
-      <AiEscapeUnderOathScenes />
+      {/* Gemini 4 Argon: Google's Secret Canary Replacing Flash (Full 8-minute Documentary) */}
+      <Gemini4ArgonLeakScenes />
     </AbsoluteFill>
   );
 };
