@@ -1,18 +1,18 @@
 import React from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { Gemini4ArgonLeakScenes } from "./scenes/Gemini4ArgonLeakScenes";
+import { KimiK31DocScenes } from "./scenes/KimiK31DocScenes";
 
 export const MainVideo: React.FC = () => {
   return (
-    <AbsoluteFill style={{ backgroundColor: "#000000" }}>
-      {/* Studio Mastered Broadcast Voiceover (en-US-ChristopherNeural + Whisper 1:1 sync) */}
+    <AbsoluteFill style={{ backgroundColor: "#020408" }}>
+      {/* 1. Mastered Broadcast Voiceover (446.32s = 7m 26s) */}
       <Audio src={staticFile("voiceover.mp3")} />
 
-      {/* Subtle Ambient Cinematic BGM ducked at -24dB */}
-      <Audio src={staticFile("bgm.mp3")} volume={0.06} />
+      {/* 2. Modern Tech Documentary Ambient BGM ducked at -29dB */}
+      <Audio src={staticFile("bgm.mp3")} volume={0.035} />
 
-      {/* Gemini 4 Argon: Google's Secret Canary Replacing Flash (Full 8-minute Documentary) */}
-      <Gemini4ArgonLeakScenes />
+      {/* 3. The 16:9 Documentary Scene Pipeline */}
+      <KimiK31DocScenes />
     </AbsoluteFill>
   );
 };

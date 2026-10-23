@@ -3,7 +3,6 @@ import sys
 import asyncio
 import subprocess
 import re
-import imageio_ffmpeg
 import edge_tts
 
 # Force UTF-8 stdout
@@ -20,7 +19,7 @@ TRANSCRIBE_SCRIPT = os.path.join(SCRIPT_DIR, "transcribe.py")
 
 # Canonical YouTube Tech Creator Voice
 VOICE = "en-US-ChristopherNeural"
-RATE = "+3%" # Energetic modern YouTube tech delivery
+RATE = "+3%" # Conversational American Male Silicon Valley tech creator pace (6.5 - 7 min)
 PITCH = "+0Hz"
 
 def clean_text_chunk(text):
@@ -54,7 +53,7 @@ async def synthesize_script():
     print(f"[OK] Raw audio generated: {RAW_MP3_PATH}")
 
 def post_process_audio():
-    ffmpeg_bin = imageio_ffmpeg.get_ffmpeg_exe()
+    ffmpeg_bin = r"C:\Users\atiqu\.gemini\antigravity\scratch\transcribe_project\.venv\Scripts\static_ffmpeg.exe"
     print(f"[FFMPEG] Converting raw MP3 to WAV for mastering...")
     subprocess.run([ffmpeg_bin, "-y", "-i", RAW_MP3_PATH, "-ar", "24000", "-ac", "1", RAW_WAV_PATH], check=True)
 

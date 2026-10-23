@@ -4,12 +4,14 @@ import { useCurrentFrame } from 'remotion';
 interface SiliconDieSchematicProps {
   color?: string;
   label?: string;
+  subtitle?: string;
   fullCanvas?: boolean;
 }
 
 export const SiliconDieSchematic: React.FC<SiliconDieSchematicProps> = ({
   color = '#00F0FF',
   label = 'NEURAL VIDEO DIFFUSION ENGINE // SILICON MATRIX',
+  subtitle = 'MASSIVE DISTRIBUTED COMPUTE CLUSTER // FRONTIER REASONING',
   fullCanvas = true,
 }) => {
   const frame = useCurrentFrame();

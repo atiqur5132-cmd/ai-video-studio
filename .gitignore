@@ -9,5 +9,15 @@ out
 public/raw_*
 public/still_*
 public/stills/
+public/stills_kimi/
+public/evidence/stills/
+public/evidence/argon_fresh_oct16/
+public/evidence/space/
+public/evidence/*_orig.mp4
+public/evidence/test_valuri.mp4
+public/mastered_voiceover.mp3
+public/voiceover_raw.mp3
+public/blackhole.m4a
+test_rate.mp3
 *.wav
 test_renders/

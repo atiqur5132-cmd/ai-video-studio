@@ -3,90 +3,234 @@
     "p_idx": 1,
     "start_sec": 0.0,
     "start_frame": 0,
-    "text": "Right now, inside your developer terminal, Google is secretly running a fro",
-    "full_text": "Right now, inside your developer terminal, Google is secretly running a frontier model that technically does not exist. While millions of engineers are paying twenty dollars a month for OpenAI and Anthropic subscriptions, Google has quietly begun routing select traffic from Gemini 3.8 Flash directly into an unreleased titan codenamed Gemini 4 Argon. And the evidence is no longer subtle. Over the past seventy-two hours, developers across Antigravity and VS Code began noticing impossible anomalies: instantaneous Three.js physics engines, procedural voxel worlds generated in a single prompt, and latency numbers that completely defy standard reasoning models.",
-    "duration_frames": 1229,
-    "duration_sec": 40.96666666666667
+    "text": "No press release. No pre-recorded keynote. No hype countdown.",
+    "full_text": "No press release. No pre-recorded keynote. No hype countdown.",
+    "duration_frames": 199,
+    "duration_sec": 6.633333333333334
   },
   {
     "p_idx": 2,
-    "start_sec": 40.96,
-    "start_frame": 1229,
-    "text": "Take a look at what just surfaced on Twitter. An indie developer named Relo",
-    "full_text": "Take a look at what just surfaced on Twitter. An indie developer named Relox AI fed a single prompt to what was supposed to be a standard lightweight model, asking for a complete, functional clone of Minecraft built entirely in Three.js. What returned was not pseudo-code or broken snippets. It generated an entire voxel sandbox running at sixty frames per second directly in the browser\u2014complete with dynamic terrain chunk generation, procedural lighting, block placement physics, and zero console errors. When engineers compared this side-by-side with GPT-6 Astra, Astra choked on the memory buffers after four hundred lines. But Gemini 4 Argon compiled the entire engine in one single pass.",
-    "duration_frames": 1347,
-    "duration_sec": 44.9
+    "start_sec": 6.64,
+    "start_frame": 199,
+    "text": "At zero one forty-one UTC, Moonshot AI quietly published a twenty-four seco",
+    "full_text": "At zero one forty-one UTC, Moonshot AI quietly published a twenty-four second video to X without a single character of text in the caption. But for the engineers and AI researchers who caught the notification, those twenty-four seconds were enough to stop everything.",
+    "duration_frames": 479,
+    "duration_sec": 15.966666666666667
   },
   {
     "p_idx": 3,
-    "start_sec": 85.86,
-    "start_frame": 2576,
-    "text": "And that was just the beginning. Within hours, another creator named Abhina",
-    "full_text": "And that was just the beginning. Within hours, another creator named Abhinav posted an interactive isometric graphics demo inspired by Elden Ring and Diablo. We are talking about custom voxel geometry, real-time ground reflections, dynamic shadow casting, and custom WebGL shaders\u2014written from absolute scratch without external libraries. Over on Vercel, builder Leo deployed an entire interactive 3D Wizard Chess game with functioning rule engines, custom pieces, and camera orbital controls. These are not static web cards or mockup landing pages. These are complex, multi-threaded graphics applications that normally require an entire team of senior graphics engineers weeks to build. When an AI generates clean Three.js scene graphs without hallucinating camera coordinate transformations, you know the underlying model has crossed a major capability threshold.",
-    "duration_frames": 1658,
-    "duration_sec": 55.266666666666666
+    "start_sec": 22.6,
+    "start_frame": 678,
+    "text": "Flashed across the screen of a vintage CRT terminal was a single line that ",
+    "full_text": "Flashed across the screen of a vintage CRT terminal was a single line that sent shockwaves through the global AI community: Model: Kimi K3.1, thinking mode: high.",
+    "duration_frames": 344,
+    "duration_sec": 11.466666666666667
   },
   {
     "p_idx": 4,
-    "start_sec": 141.14,
-    "start_frame": 4234,
-    "text": "So why is Google testing this in secret instead of hosting a massive press ",
-    "full_text": "So why is Google testing this in secret instead of hosting a massive press event? The answer lies in a leaked benchmark table that just sent shockwaves through San Francisco. According to verified testing data from Anton Sgibnev and multiple frontier researchers, Gemini 4 Argon scored an unprecedented 77.9% on DeepSWE. To put that number into perspective, Claude Opus 5.5 sits at roughly 72%, and OpenAI's GPT-6 Astra tops out around 71%. On the Vals Index and autonomous developer benchmarks, Argon didn't just lead\u2014it shattered the ceiling for multi-file repo refactoring, continuous integration pipelines, and autonomous debugging.",
-    "duration_frames": 151,
-    "duration_sec": 5.033333333333333
+    "start_sec": 34.06,
+    "start_frame": 1022,
+    "text": "China\u2019s open-weight heavyweight just broke cover. And what the community ha",
+    "full_text": "China\u2019s open-weight heavyweight just broke cover. And what the community has uncovered in the hours following this wordless drop reveals a calculated strategy that has been silently underway for weeks.",
+    "duration_frames": 103,
+    "duration_sec": 3.433333333333333
   },
   {
     "p_idx": 5,
-    "start_sec": 146.16,
-    "start_frame": 4385,
-    "text": "For the past two years, the conventional wisdom was that Anthropic held an ",
-    "full_text": "For the past two years, the conventional wisdom was that Anthropic held an unbreakable monopoly on real software engineering. Developers happily tolerated strict rate limits and expensive API tokens because nothing else could touch Claude Opus. But Argon changes the entire equation. On complex automation suites, it is closing pull requests faster than human teams can review them. Yet, there is a fascinating catch. On Terminal-Bench 4.0, Claude Opus 5.5 still holds a slight lead in raw terminal bash execution\u2014around 66% compared to Argon's 57%. This reveals the exact architectural split: while Anthropic optimized Opus for raw command-line autonomy, Google engineered Argon to be an end-to-end visual, mathematical, and architectural synthesis engine.",
-    "duration_frames": 2742,
-    "duration_sec": 91.4
+    "start_sec": 37.5,
+    "start_frame": 1125,
+    "text": "Look closely at the opening seconds of the official footage. The environmen",
+    "full_text": "Look closely at the opening seconds of the official footage. The environment is Kimi Code, Moonshot\u2019s specialized developer environment. The system directory reads /Users/moonshot, and the prompt entered into the terminal is deceptively simple: Build a complex procedural 3D scene in Three.js.",
+    "duration_frames": 829,
+    "duration_sec": 27.633333333333333
   },
   {
     "p_idx": 6,
-    "start_sec": 237.58,
-    "start_frame": 7127,
-    "text": "Now here is where the story turns from exciting to deeply controversial. Wh",
-    "full_text": "Now here is where the story turns from exciting to deeply controversial. Why hasn't Google made Argon publicly available to every paying user? The answer was just confirmed by leaked transcripts from the United Kingdom's AI Security Institute. Just like OpenAI's Astra, Gemini 4 Argon demonstrated autonomous offensive cybersecurity capabilities that triggered mandatory pre-deployment audit redlines. Under voluntary agreements with sovereign safety boards, models that cross specific autonomous exploit discovery and sandbox escalation thresholds cannot be deployed without rigorous containment testing. Narayan from the AI Security Institute officially confirmed that scientists are actively conducting evaluations on Gemini 4 Argon to test safeguards before any public rollout. Google quietly placed Argon under its Fairwind Cyber Defender program, restricting raw access strictly to enterprise security teams and verified red-team researchers.",
-    "duration_frames": 1716,
-    "duration_sec": 57.2
+    "start_sec": 65.12,
+    "start_frame": 1954,
+    "text": "Instead of outputting generic textbook snippets or hallucinated boilerplate",
+    "full_text": "Instead of outputting generic textbook snippets or hallucinated boilerplate, Kimi K3.1 immediately executes an autonomous file write to scene.js. In real time, the model synthesizes complex buffer geometries, vertex normals, wireframe controls, and dynamic scene illumination with zero human intervention.",
+    "duration_frames": 634,
+    "duration_sec": 21.133333333333333
   },
   {
     "p_idx": 7,
-    "start_sec": 294.76,
-    "start_frame": 8843,
-    "text": "What we are witnessing in Antigravity and select developer IDEs is a contro",
-    "full_text": "What we are witnessing in Antigravity and select developer IDEs is a controlled canary deployment. Google is silently A/B testing Argon's inference speed against real-world developer workloads under the guise of Gemini 3.8 Flash. They are measuring compute efficiency, caching behavior, and real-time token throughput before opening the floodgates. And according to insider reports, Argon is only the first phase of a massive release train. While Argon is being stabilized in production, an even larger model codenamed Gemini Carbon is already running through staging environments. As Anton Sgibnev put it: Argon is in production, Carbon is in staging\u2014and the question is who is on call when staging quietly becomes production.",
-    "duration_frames": 1351,
-    "duration_sec": 45.03333333333333
+    "start_sec": 86.28,
+    "start_frame": 2588,
+    "text": "Within seconds, the demo transitions to an entirely different computational",
+    "full_text": "Within seconds, the demo transitions to an entirely different computational domain: raw Blender Python scripting. The model writes modular Python scripts across scene.py, facade.py, and geometry.py, autonomously constructing procedural multi-story architectural facades. It calculates window bay offsets, instantiates quad faces, sets up material shaders, and triggers automated headless rendering.",
+    "duration_frames": 839,
+    "duration_sec": 27.966666666666665
   },
   {
     "p_idx": 8,
-    "start_sec": 339.8,
-    "start_frame": 10194,
-    "text": "Think about the sheer economic disruption this represents. Right now, devel",
-    "full_text": "Think about the sheer economic disruption this represents. Right now, developers are spending hundreds of dollars every month juggling Claude Pro and ChatGPT Plus subscriptions just to bypass daily token meters. OpenAI just cut its Pro two hundred usage limits in half while pushing users toward a five hundred dollar enterprise tier. Meanwhile, Google owns its custom TPU v5p and TPU v6 Trillium infrastructure from the silicon die all the way up to the data center network. If Google rolls out Gemini 4 Argon into the standard Gemini Advanced tier\u2014or makes it accessible through their free developer quotas\u2014it instantly detonates the subscription pricing model of the entire industry. When a model that beats Opus 5.5 on DeepSWE is priced like a lightweight Flash model, the math for twenty-dollar chatbots completely evaporates.",
-    "duration_frames": 1567,
-    "duration_sec": 52.233333333333334
+    "start_sec": 114.22,
+    "start_frame": 3427,
+    "text": "The video culminates in a photorealistic, ray-traced rendering of the moon ",
+    "full_text": "The video culminates in a photorealistic, ray-traced rendering of the moon rotating against a starfield. It is a cinematic tribute to Moonshot\u2019s namesake, but more importantly, it is an aggressive flex of spatial reasoning, procedural 3D geometry, and agentic multi-file code execution.",
+    "duration_frames": 538,
+    "duration_sec": 17.933333333333334
   },
   {
     "p_idx": 9,
-    "start_sec": 392.02,
-    "start_frame": 11761,
-    "text": "So how can you tell if your terminal is currently routed to Gemini 4 Argon?",
-    "full_text": "So how can you tell if your terminal is currently routed to Gemini 4 Argon? Watch your inference logs carefully. When you prompt Gemini in Antigravity or compatible IDEs, pay attention to three telltale fingerprints: First, look for multi-threaded Three.js or WebGL responses that compile without syntax corrections. Standard Flash models almost always fail camera aspect matrices on the first attempt, but Argon generates mathematically pristine scene graphs. Second, look for token generation speeds exceeding one hundred and forty tokens per second on reasoning tasks that normally cause fifteen-second latency delays. And third, look for architectural decisions that proactively refactor auxiliary files before you even ask for them. If your model behaves like a staff-level systems architect instead of an autocomplete assistant, you are looking at Argon.",
-    "duration_frames": 1603,
-    "duration_sec": 53.43333333333333
+    "start_sec": 132.16,
+    "start_frame": 3965,
+    "text": "Immediately after the video surfaced, developers rushed to social media to ",
+    "full_text": "Immediately after the video surfaced, developers rushed to social media to connect the dots. Prominent technical commentators, including Carbon-life and AskClash, noted that this wasn't an isolated prototype. The identifier \"kimi-k3-1\" first quietly appeared in Moonshot's backend API endpoints in late September.",
+    "duration_frames": 651,
+    "duration_sec": 21.7
   },
   {
     "p_idx": 10,
-    "start_sec": 445.46,
-    "start_frame": 13364,
-    "text": "The silent battle for frontier AI supremacy is no longer happening on stage",
-    "full_text": "The silent battle for frontier AI supremacy is no longer happening on stage at glossy developer conferences. It is happening right now, line by line, inside production compilers and leaked staging endpoints. Google was written off as lagging behind OpenAI and Anthropic. But with Gemini 4 Argon quietly crushing DeepSWE benchmarks and running real-time 3D sandboxes inside browser viewports, the tables have completely flipped. The next era of AI isn't coming next year. It is already executing in your terminal.",
-    "duration_frames": 1059,
-    "duration_sec": 35.3
+    "start_sec": 153.86,
+    "start_frame": 4616,
+    "text": "Then, just two days ago, on October twenty-first, developers noticed the mo",
+    "full_text": "Then, just two days ago, on October twenty-first, developers noticed the model name flashing briefly inside Kimi Code's desktop configuration files. Moonshot wasn\u2019t just testing the model in private isolation; they were already preparing their production infrastructure for a global switchover.",
+    "duration_frames": 536,
+    "duration_sec": 17.866666666666667
+  },
+  {
+    "p_idx": 11,
+    "start_sec": 171.74,
+    "start_frame": 5152,
+    "text": "And that brings us to the biggest mystery that has consumed the LMSYS Chatb",
+    "full_text": "And that brings us to the biggest mystery that has consumed the LMSYS Chatbot Arena over the past three days.",
+    "duration_frames": 199,
+    "duration_sec": 6.633333333333334
+  },
+  {
+    "p_idx": 12,
+    "start_sec": 178.38,
+    "start_frame": 5351,
+    "text": "Earlier this week, an anonymous, unverified model appeared in the Arena und",
+    "full_text": "Earlier this week, an anonymous, unverified model appeared in the Arena under the codename \"Kibitz\". It immediately began wrecking leaderboards in blind human evaluations. In head-to-head coding battles, Kibitz exhibited eerie capabilities, effortlessly debugging intricate multi-threaded architectures and generating interactive web visualizations that left benchmarkers stunned.",
+    "duration_frames": 689,
+    "duration_sec": 22.966666666666665
+  },
+  {
+    "p_idx": 13,
+    "start_sec": 201.32,
+    "start_frame": 6040,
+    "text": "Independent tester Sree ran Kibitz through his rigorous Konark Sun Temple c",
+    "full_text": "Independent tester Sree ran Kibitz through his rigorous Konark Sun Temple challenge. While competing frontier models produced cluttered or broken layouts, Kibitz generated the cleanest spatial architecture and page design among all models tested.",
+    "duration_frames": 442,
+    "duration_sec": 14.733333333333333
+  },
+  {
+    "p_idx": 14,
+    "start_sec": 216.08,
+    "start_frame": 6482,
+    "text": "Another benchmark researcher, Ahazei, documented that in direct tests on pr",
+    "full_text": "Another benchmark researcher, Ahazei, documented that in direct tests on procedural animation and visual 3D construction, Kibitz went toe-to-toe with the world's reigning closed frontier model, GPT-6 Astra.",
+    "duration_frames": 419,
+    "duration_sec": 13.966666666666667
+  },
+  {
+    "p_idx": 15,
+    "start_sec": 230.04,
+    "start_frame": 6901,
+    "text": "When curious developers began probing Kibitz's identity, the clues began pi",
+    "full_text": "When curious developers began probing Kibitz's identity, the clues began piling up. In several unmasked conversational turns, Kibitz explicitly identified its creator as Moonshot AI. Furthermore, community tokenizer and fingerprinting tests revealed internal token distribution curves identical to Moonshot\u2019s Kimi family.",
+    "duration_frames": 164,
+    "duration_sec": 5.466666666666667
+  },
+  {
+    "p_idx": 16,
+    "start_sec": 235.5,
+    "start_frame": 7065,
+    "text": "As AI researcher David Hendrickson pointed out, Moonshot has a documented h",
+    "full_text": "As AI researcher David Hendrickson pointed out, Moonshot has a documented history of this exact playbook. Before launching Kimi K2.5, they tested anonymously as \"Kiwido\". Before K2.6, they tested as \"Kiwire\". And right before dropping their flagship Kimi K3, they tested on the Arena under the name \"Kivine\". The progression to \"Kibitz\" fits their historical pattern to the letter.",
+    "duration_frames": 466,
+    "duration_sec": 15.533333333333333
+  },
+  {
+    "p_idx": 17,
+    "start_sec": 251.02,
+    "start_frame": 7531,
+    "text": "David Hendrickson also uncovered the definitive smoking gun: a hardcoded mi",
+    "full_text": "David Hendrickson also uncovered the definitive smoking gun: a hardcoded migration rule inside Kimi Code's configuration dictionary. The rule explicitly targets \"k3.1\", automatically routing existing sessions from K3 and kimi-for-coding directly into K3.1 with a system warning that continuing the session with Kimi 3.1 may affect output quality.",
+    "duration_frames": 1525,
+    "duration_sec": 50.833333333333336
+  },
+  {
+    "p_idx": 18,
+    "start_sec": 301.88,
+    "start_frame": 9056,
+    "text": "The strategic brilliance of this rollout cannot be overstated. As developer",
+    "full_text": "The strategic brilliance of this rollout cannot be overstated. As developer Deven Baskota observed, this is one of the most ruthless marketing strategies in artificial intelligence: drop a silent twenty-four second clip without benchmarks, and let blind community evaluators in the Arena prove your model's dominance for you.",
+    "duration_frames": 558,
+    "duration_sec": 18.6
+  },
+  {
+    "p_idx": 19,
+    "start_sec": 320.48,
+    "start_frame": 9614,
+    "text": "Why does Kimi K3.1 matter so much to the global AI landscape?",
+    "full_text": "Why does Kimi K3.1 matter so much to the global AI landscape?",
+    "duration_frames": 152,
+    "duration_sec": 5.066666666666666
+  },
+  {
+    "p_idx": 20,
+    "start_sec": 325.52,
+    "start_frame": 9766,
+    "text": "To understand the stakes, we have to look back at the release of Kimi K3 in",
+    "full_text": "To understand the stakes, we have to look back at the release of Kimi K3 in July. Moonshot didn't just build a competitive model; they released the full weights of a 2.8 trillion parameter Mixture of Experts architecture with native visual comprehension and a massive one million token context window. It gave developers worldwide the ability to run frontier-tier intelligence locally, completely bypassing proprietary cloud gatekeepers.",
+    "duration_frames": 791,
+    "duration_sec": 26.366666666666667
+  },
+  {
+    "p_idx": 21,
+    "start_sec": 351.9,
+    "start_frame": 10557,
+    "text": "Kimi K3.1 appears to double down on that exact philosophy, but with two mas",
+    "full_text": "Kimi K3.1 appears to double down on that exact philosophy, but with two massive leaps forward: specialized procedural 3D reasoning and radical inference cost efficiency.",
+    "duration_frames": 334,
+    "duration_sec": 11.133333333333333
+  },
+  {
+    "p_idx": 22,
+    "start_sec": 363.04,
+    "start_frame": 10891,
+    "text": "Arena benchmarkers analyzing token economics report that Kibitz completes i",
+    "full_text": "Arena benchmarkers analyzing token economics report that Kibitz completes identical complex reasoning queries at a fraction of the token expenditure required by closed Western frontier models. For startups and autonomous agent developers building long-horizon coding swarms, that kind of cost arbitrage is an absolute game-changer.",
+    "duration_frames": 586,
+    "duration_sec": 19.533333333333335
+  },
+  {
+    "p_idx": 23,
+    "start_sec": 382.56,
+    "start_frame": 11477,
+    "text": "Furthermore, community discussions led by developers like Priyesh suggest K",
+    "full_text": "Furthermore, community discussions led by developers like Priyesh suggest K3.1 is engineered as the foundation for the upcoming SWE-bench 2 standards, integrating deep reinforcement learning across extended thinking chains. Where earlier models struggled with state preservation across thousands of lines of code, K3.1\u2019s thinking mode dynamically allocates test-time compute to verify logic before executing syntax.",
+    "duration_frames": 789,
+    "duration_sec": 26.3
+  },
+  {
+    "p_idx": 24,
+    "start_sec": 408.86,
+    "start_frame": 12266,
+    "text": "If Moonshot follows their established precedent and releases the weights fo",
+    "full_text": "If Moonshot follows their established precedent and releases the weights for Kimi K3.1 under an open license, it will fundamentally reset the open-source hierarchy. It directly challenges the dominance of closed API labs, offering enterprise-grade 3D CAD modeling, game development logic, and autonomous software engineering without vendor lock-in.",
+    "duration_frames": 645,
+    "duration_sec": 21.5
+  },
+  {
+    "p_idx": 25,
+    "start_sec": 430.36,
+    "start_frame": 12911,
+    "text": "The twenty-four second clock is ticking. History tells us that an Arena lea",
+    "full_text": "The twenty-four second clock is ticking. History tells us that an Arena leak combined with an official teaser means the full release is only days, if not hours, away.",
+    "duration_frames": 320,
+    "duration_sec": 10.666666666666666
+  },
+  {
+    "p_idx": 26,
+    "start_sec": 441.04,
+    "start_frame": 13231,
+    "text": "The frontier just shifted again. And this time, it came from the dark side ",
+    "full_text": "The frontier just shifted again. And this time, it came from the dark side of the moon.",
+    "duration_frames": 159,
+    "duration_sec": 5.3
   }
 ]
